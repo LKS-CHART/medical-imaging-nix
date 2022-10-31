@@ -65,8 +65,8 @@ final: prev: {
              version = "0.0.4";
              src = pfinal.fetchPypi {
                 inherit pname version;
-                sha256 = "2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
-              };
+			sha256 = "2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
+		      };
              propagatedBuildInputs = with pfinal; [
                numpy scikit-learn typing-extensions opencv3
              ];
@@ -88,8 +88,8 @@ final: prev: {
               };
              propagatedBuildInputs = with pfinal; [
                numpy scipy scikitimage pyyaml qudida pytorchWithCuda torchvision imgaug
-             ];
-             checkInputs = [ pfinal.pytest ];
+		     ];
+		     checkInputs = [ pfinal.pytest ];
              postPatch = ''
                substituteInPlace setup.py --replace \
                  "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
@@ -395,4 +395,12 @@ final: prev: {
    einops = (pprev.einops.override { pytorch = pfinal.pytorchWithCuda;}).overridePythonAttrs (ps: { doCheck = false; });
         };
         };
+	charticles = with final; rPackages.buildRPackage {
+		   name = "charticles";
+		   src = fetchgit {
+		     url = "ssh://git@github.com/LKS-CHART/charticles";
+		     rev = "3bf371f";
+		     sha256 = "qYUpliKrEFM4PVOUrSfh/2Iffl898lL78zb9iVskc7c=";
+		   };
+	};
       }

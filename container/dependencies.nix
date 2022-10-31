@@ -38,6 +38,14 @@ let patched_rPackages =
         batchtools
         tidyverse
         reticulate
+	charticles
+        keyring
+        dbplyr
+        RMariaDB
+        pROC
+        distr
+	lenses
+	openxlsx
       ];
     })
     (python39.withPackages (ps: with ps; [
