@@ -12,20 +12,15 @@
 
 buildPythonPackage rec {
   pname = "monai";
-  version = "0.9.0";
+  version = "1.0.1";
   disabled = pythonOlder "3.7";
 
   src = fetchFromGitHub {
     owner = "Project-MONAI";
     repo = "MONAI";
     rev = version;
-    sha256 = "sha256-Kgi0m3OuLHCIo/gl35Hn2fyOWr2lcwNgswgKeWBGJPQ=";
+    sha256 = "sha256-92AkKB8XSl8tZYavVw/hRXkxfaBlpEDq0gdouMPmfUU=";
   };
-
-  # Ninja is not detected by setuptools for some reason even though it's present:
-  postPatch = ''
-    substituteInPlace "setup.cfg" --replace "ninja" ""
-  '';
 
   preBuild = ''
     export MAX_JOBS=$NIX_BUILD_CORES;
