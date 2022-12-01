@@ -389,6 +389,20 @@ final: prev: {
               };
              propagatedBuildInputs = with pfinal; [ numpy ];	     
           };
+         pyorthanc = pfinal.buildPythonPackage rec {
+            pname = "pyorthanc";
+            version = "1.11.2";
+            src = pfinal.fetchPypi {
+               inherit pname version;
+               sha256 = "mw92w4VO6HnjKy8Qof8Hidr5MpX6Dom5jxmA5flswNk=";
+            };
+            postPatch = ''
+            substituteInPlace pyproject.toml --replace 'httpx = "^0.23.0"' ""
+            substituteInPlace setup.py --replace "'httpx>=0.23.0,<0.24.0'" "'httpx'"
+            substituteInPlace setup.py --replace "'pydicom>=2.3.0,<3.0.0'" "'pydicom'"
+            '';
+            propagatedBuildInputs = with pfinal; [ httpx pydicom requests ];
+         };
          optuna = with final; with pfinal; callPackage ./optuna.nix {};
 	 ignite = with pfinal; pprev.ignite.override { pytorch = pytorchWithCuda; };
 	 monai = with final; with pfinal; callPackage ./monai.nix {};

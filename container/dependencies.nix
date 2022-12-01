@@ -157,9 +157,10 @@ let patched_rPackages =
         pycparser
         pycrypto
         pydicom
+        pynetdicom
         pygments
 	pyodbc
-        #pyorthanc
+        pyorthanc
         pyparsing
         #pypx
         pyramid
