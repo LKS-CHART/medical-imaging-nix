@@ -48,6 +48,12 @@
           container = import ./container/mk-container.nix {pkgs = nixpkgsFor.${system}; 
           contents = contentsFor.${system}; 
         };});
+      templates = {
+        mi-flake = {
+          path = ./template;
+          description = "A flake for medical imaging AI";
+        };};
       defaultPackage = forAllSystems (system: self.packages.${system}.container);
+      defaultTemplate = self.templates.mi-flake;
     };
 }
