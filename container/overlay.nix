@@ -1,5 +1,4 @@
 final: prev: {
-        #singularity-tools = final.callPackage ./singularity-tools.nix {};
         cudatoolkit = prev.cudatoolkit_11_4;
         cudnn = prev.cudnn_8_3_cudatoolkit_11_4;
         python39 = prev.python39.override { packageOverrides = pfinal: pprev: {
@@ -126,68 +125,6 @@ final: prev: {
              ];
              checkInputs = with pfinal; [ pytest matplotlib ];
              pythonImportsCheck = [ "torchio" ];
-          };
-          fslpy = pfinal.buildPythonPackage rec {
-             pname = "fslpy";
-             version = "3.8.2";
-             src = final.fetchgit {
-                url = "https://git.fmrib.ox.ac.uk/fsl/fslpy";
-                rev = "2089ed11";
-                sha256 = "gRpIQTIRFYOvr5zlVfo0oN9NcdEdDahMbzGRmFzkex0=";
-              };
-             propagatedBuildInputs = with pfinal; [
-               h5py nibabel numpy scipy 
-             ];
-             checkPhase = ''
-               pytest tests/
-             '';
-             doCheck = false;
-             checkInputs = with pfinal; [ pytest sphinx sphinx_rtd_theme coverage pytest-cov ];
-             pythonImportsCheck = [ "fsl" ];
-          };
-           fsleyes-widgets =  pfinal.buildPythonPackage rec {
-             pname = "fsleyes-widgets";
-             version = "0.12.2";
-             src = pfinal.fetchPypi {
-                inherit pname version;
-                sha256 = "LpYHh4f48Al1GYip6d3qPIZYcAQCWEvMY9zMl0aY7pw=";
-              };
-             propagatedBuildInputs = with pfinal; [
-               numpy matplotlib wxPython_4_0
-             ];
-             checkInputs = with pfinal; [ pytest sphinx sphinx_rtd_theme coverage pytest-cov ];
-             pythonImportsCheck = [ "fsleyes_widgets" ];
-             checkPhase = "pytest tests/";
-             doCheck = false;
-          }; 
-           fsleyes-props = pfinal.buildPythonPackage rec {
-             pname = "fsleyes-props";
-             version = "1.7.3";
-             src = pfinal.fetchPypi {
-                inherit pname version;
-                sha256 = "1MNovmacyAt4bB4niK0e7HK5lwimLr8BrdSRTYBsBzg=";
-              };
-             propagatedBuildInputs = with pfinal; [
-               numpy matplotlib wxPython_4_0 fsleyes-widgets fslpy
-             ];
-             checkInputs = with pfinal; [ pytest sphinx sphinx_rtd_theme coverage pytest-cov ];
-             pythonImportsCheck = [ "fsleyes_props" ];
-             doCheck = false;
-          }; 
-           fsleyes =  pfinal.buildPythonPackage rec {
-             pname = "fsleyes";
-             version = "1.3.3";
-             src = pfinal.fetchPypi {
-                inherit pname version;
-                sha256 = "zCbtJxwR30iXgTmkUc6FybrqqHZeDb4z0EB8sOW9XVE=";
-              };
-              nativeBuildInputs = [ final.wrapGAppsHook ];
-              propagatedBuildInputs = with pfinal; [ jinja2 pillow pyopengl fsleyes-props fsleyes-widgets fslpy
-                                                     matplotlib nibabel numpy pyparsing scipy setuptools wxPython_4_0 ];
-              postPatch = ''
-              substituteInPlace requirements.txt --replace "pyparsing==2.*" "pyparsing"
-              '';
-              doCheck = false;
           };
           pythreejs = pfinal.buildPythonPackage rec {
              pname = "pythreejs";
@@ -406,7 +343,7 @@ final: prev: {
          optuna = with final; with pfinal; callPackage ./optuna.nix {};
 	 ignite = with pfinal; pprev.ignite.override { pytorch = pytorchWithCuda; };
 	 monai = with final; with pfinal; callPackage ./monai.nix {};
-   einops = (pprev.einops.override { pytorch = pfinal.pytorchWithCuda;}).overridePythonAttrs (ps: { doCheck = false; });
+         einops = (pprev.einops.override { pytorch = pfinal.pytorchWithCuda;}).overridePythonAttrs (ps: { doCheck = false; });
         };
         };
 	charticles = with final; rPackages.buildRPackage {

@@ -38,7 +38,7 @@ let patched_rPackages =
         batchtools
         tidyverse
         reticulate
-	charticles
+	#charticles
         keyring
         dbplyr
         RMariaDB
@@ -198,8 +198,6 @@ let patched_rPackages =
 	torchmetrics
         simpleitk
         torchio
-        fslpy
-        fsleyes
         tornado
         tqdm
         traitlets
