@@ -27,6 +27,7 @@ let patched_rPackages =
   zip unzip
   pandoc
   dcm2niix dcmtk gdcm simpleitk ants
+  cudatoolkit
   snakemake
   (nixgl.nvidiaPackages { version = "470.103.01"; sha256 = "19c7r3nrdi48vkzg6ykj7hfkgmvm49xhydj61hxlc4y2i6gk1hjn"; }).nixGLNvidia
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy ]))

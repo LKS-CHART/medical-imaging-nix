@@ -1,5 +1,5 @@
 {
-  description = "A container and dev environment for data science";
+  description = "A container and dev environment for medical imaging data science";
 
   # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "nixpkgs/4c3c80df545e";
