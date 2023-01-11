@@ -1,5 +1,5 @@
 {
-  description = "Code for the TBI neurosurgery prediction project";
+  description = "Project name here";
   inputs.mi-flake.url = "github:LKS-CHART/medical-imaging-nix?ref=main";
   outputs = { self, mi-flake }:
    let
