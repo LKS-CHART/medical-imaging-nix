@@ -27,7 +27,7 @@ let patched_rPackages =
   zip unzip
   pandoc
   dcm2niix dcmtk gdcm simpleitk ants
-  cudatoolkit
+  cudaPackages.cudatoolkit
   snakemake
   (nixgl.nvidiaPackages { version = "470.103.01"; sha256 = "19c7r3nrdi48vkzg6ykj7hfkgmvm49xhydj61hxlc4y2i6gk1hjn"; }).nixGLNvidia
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy ]))
@@ -49,13 +49,13 @@ let patched_rPackages =
 	openxlsx
       ];
     })
-    (python39.withPackages (ps: with ps; [
+    (python310.withPackages (ps: with ps; [
         addict
-        albumentations
         #apex
         #apiron
         argon2_cffi
         argon2-cffi-bindings
+        arviz
         asn1crypto
         async_generator
         attrs
@@ -82,7 +82,6 @@ let patched_rPackages =
         hupper
         idna
         imageio
-        imgaug
         importlib-metadata
         ipykernel
         ipython
@@ -93,7 +92,7 @@ let patched_rPackages =
         ipyannotations
         superintendent
         niwidgets
-        nipype
+        #nipype
         antspyx
         iso8601
         jedi
@@ -134,7 +133,6 @@ let patched_rPackages =
         numpy
         oauthlib
 	openpyxl
-	optuna
         #orthanc-rest-client
         packaging
         pandas
@@ -180,6 +178,7 @@ let patched_rPackages =
         qtpy
         requests
         requests_oauthlib
+        rpy2
         scikitimage
         scikit-learn
         scipy
@@ -198,6 +197,7 @@ let patched_rPackages =
         torchvision
 	torchmetrics
         simpleitk
+        seaborn
         torchio
         tornado
         tqdm
@@ -213,6 +213,7 @@ let patched_rPackages =
         webencodings
         widgetsnbextension
         wtforms
+        xarray
         xgboost
         zipp
     ]))

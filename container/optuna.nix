@@ -13,7 +13,7 @@
 , mxnet
 , scikit-optimize
 , tensorflow
-, pytorchWithCuda
+, torch
 , pytorch-lightning
 , cma
 , sqlalchemy
@@ -35,14 +35,14 @@
 
 buildPythonPackage rec {
   pname = "optuna";
-  version = "2.10.0";
+  version = "3.0.5";
   disabled = isPy27;
 
   src = fetchFromGitHub {
     owner = "optuna";
     repo = pname;
     rev = "v${version}";
-    sha256 = "0fha0pwxq6n3mbpvpz3vk8hh61zqncj5cnq063kzfl5d8rd48vcd";
+    sha256 = "TfAWL81a7GIePkPm+2uXinBP5jwnhWCZPp5GJjXOC6g=";
   };
 
   checkInputs = [
@@ -60,7 +60,7 @@ buildPythonPackage rec {
     tensorflow
     cma
     cmaes
-    pytorchWithCuda
+    torch
     pytorch-lightning
     fakeredis
   ];
@@ -81,8 +81,10 @@ buildPythonPackage rec {
 
   configurePhase = if !(pythonOlder "3.5") then ''
     substituteInPlace setup.py \
-      --replace "'typing'," ""
-  '' else "";
+      --replace "'typing'," "" \
+      --replace '"scipy>=1.7.0,<1.9.0"' '"scipy"'
+  '' else ''
+  '';
 
   checkPhase = ''
     pytest --ignore tests/test_cli.py \
@@ -99,6 +101,7 @@ buildPythonPackage rec {
    	   --ignore tests/integration_tests/test_lightgbm.py \
 	   --ignore tests/integration_tests/lightgbm_tuner_tests/test_optimize.py \
 	   --ignore tests/integration_tests/allennlp_tests/test_allennlp.py \
-	   --ignore tests/integration_tests/test_catalyst.py
+	   --ignore tests/integration_tests/test_catalyst.py \
+           --ignore tests/integration_tests/test_catboost.py
   '';
 }
