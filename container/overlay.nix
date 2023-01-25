@@ -1,6 +1,7 @@
 old-pkgs: final: prev: {
         dcmtk = old-pkgs.dcmtk;
         python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+          opencv3 = pprev.opencv3.override { openblas = final.openblasCompat; };
           torch = pprev.torch.override { cudaSupport = true; };
           poetry = pprev.poetry.overrideAttr (af: ap: { postPatch = ''
             substituteInPlace pyproject.toml \
@@ -341,7 +342,7 @@ old-pkgs: final: prev: {
                                                    pyyaml
                                                  ];
             format = "pyproject";
-            #pythonImportsCheck = [ "mdai" ];
+            pythonImportsCheck = [ "mdai" ];
 
             postPatch = ''
 	    substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""

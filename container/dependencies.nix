@@ -113,6 +113,7 @@ let patched_rPackages =
         keyrings-alt
         kiwisolver
         lightgbm
+        lightning-utilities
         llvmlite
         markupsafe
         matplotlib
