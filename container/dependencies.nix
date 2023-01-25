@@ -195,6 +195,7 @@ let patched_rPackages =
         pytorchWithCuda
         pytorch-lightning
         tensorflow
+        tensorboardx
         torchvision
 	torchmetrics
         simpleitk
