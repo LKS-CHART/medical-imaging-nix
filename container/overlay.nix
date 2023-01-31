@@ -371,7 +371,11 @@ old-pkgs: final: prev: {
             '';
       propagatedBuildInputs = with pfinal; [ httpx pydicom requests ];
     };
-    optuna = with final; with pfinal; callPackage ./optuna.nix {};
+    optuna = with final; with pfinal; callPackage ./overlays/optuna/optuna.nix {};
+    ipywidgets = with final; with pfinal; callPackage ./overlays/ipywidgets/ipywidgets.nix {};
+    widgetsnbextension = with final; with pfinal;
+      callPackage ./overlays/widgetsnbextension/widgetsnbextension.nix {};
+    nbconvert = with final; with pfinal; callPackage ./overlays/nbconvert/nbconvert.nix {};
   };
                                       };
 	charticles = with final; rPackages.buildRPackage {
