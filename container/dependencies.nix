@@ -30,7 +30,7 @@ let patched_rPackages =
   cudaPackages.cudatoolkit
   snakemake
   (nixgl.nvidiaPackages { version = "470.103.01"; sha256 = "19c7r3nrdi48vkzg6ykj7hfkgmvm49xhydj61hxlc4y2i6gk1hjn"; }).nixGLNvidia
-  (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy ]))
+  (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (with patched_rPackages;
     # rWrapper bakes R_SITE_LIBS into the intepretter
     rWrapper.override {
