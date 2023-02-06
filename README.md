@@ -23,4 +23,4 @@ a container you can run
 nix build
 ```
 
-this also takes a very long time due to slow copying into the container image via qemu.
+this takes a bit of time, so maybe start it before your next meeting.
