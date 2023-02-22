@@ -1,126 +1,36 @@
 old-pkgs: final: prev: {
-  dcmtk = old-pkgs.dcmtk;
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
-    opencv3 = pprev.opencv3.override { openblas = final.openblasCompat; };
-    torch = pprev.torch.override { cudaSupport = true; };
-    poetry = pprev.poetry.overrideAttr (af: ap: { postPatch = ''
-            substituteInPlace pyproject.toml \
-                  --replace 'crashtest = "^0.3.0"' 'crashtest = "*"' \
-                  --replace 'xattr = { version = "^0.9.7"' 'xattr = { version = "^0.10.0"' \
-                  --replace 'cleo = "^2.0.0"' ""
-                                                                    ''; });
+    # remove `torch` and `tensorflow` overrides when config.enableCuda is set
+    # after https://github.com/NixOS/nixpkgs/issues/220341 is resolved
+    torch = pprev.torch.override {
+      cudaSupport = true;
+    };
     tensorflow = pprev.tensorflow-build.override ({
       cudaSupport = true;
     });
-    ttach = pfinal.buildPythonPackage rec {
-      pname = "ttach";
-      version = "0.0.3";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "EgxN2IH+sOnI3WOxVPJlWJHD4gaJtoqU0WK/1VV7y0g=";
-      };
-      checkInputs = [ pfinal.pytest pfinal.torch ];
-    };
-    #torchvision = pprev.torchvision.override { pytorch = pfinal.pytorchWithCuda; };
-    pydeprecate = pfinal.buildPythonPackage rec {
-      pname = "pyDeprecate";
-      version = "0.3.1";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "+iaHCSTTR1Yhw0QEXCwBoWugNBE6kCYAx451s/rF9yw=";
-      };
-    };
-    torchmetrics = pfinal.buildPythonPackage rec {
-      pname = "torchmetrics";
-      version = "0.7.3";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "h150Sm22PIh1cmDWPLgJGdA5hzSn9Fb46kGBuy25V9g=";
-      };
-      propagatedBuildInputs = with pfinal; [ numpy torch pydeprecate ];
-      checkInputs = with pfinal; [ pytest pytest-doctestplus pytestCheckHook ];
-    };
-    lightning-utilities = pfinal.buildPythonPackage rec {
-      pname = "lightning-utilities";
-      version = "0.5.0";
-      src = final.fetchFromGitHub {
-        owner = "Lightning-AI";
-        repo = "utilities";
-        rev = "v" + version;
-        hash = "sha256-J73sUmX1a7ww+rt1vwBt9P0Xbeoxag6jR0W63xEySCI=";
-      };
-      propagatedBuildInputs = with pfinal; [ fire typing-extensions packaging ];
-      #checkInputs = with pfinal; [ pytestCheckHook ];
-      doCheck = false;
-    };
-    pytorch-lightning = pprev.pytorch-lightning.overrideAttrs (oa: rec {
-      propagatedBuildInputs = oa.propagatedBuildInputs ++
-                              (with pfinal; [ pydeprecate torchmetrics fsspec croniter
-                                              deepdiff arrow psutil beautifulsoup4 lightning-utilities
-                                              inquirer tensorboardx
-                                            ]);
-      version = "1.8.6";
-      src = final.fetchFromGitHub {
-        owner = "Lightning-AI";
-        repo = oa.pname;
-        rev = version;
-        hash = "sha256-5AyOCeRFiV7rdmoBPx03Xju6eTR/3jiE+HQBiEmdzmo=";
-      };
-      PACKAGE_NAME="pytorch";
-      postPatch = ''
-               substituteInPlace requirements/app/base.txt --replace "inquirer>=2.10.0" "inquirer"
-               '';
-    });
-    grad-cam = pfinal.buildPythonPackage rec {
-      pname = "grad-cam";
-      version = "1.3.7";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "y9LlgmgbP7X+Qdx+cs0Z4b1mXgPhgCX1IFCvLTI8ces=";
-      };
-      propagatedBuildInputs = with pfinal; [
-        numpy pillow torch torchvision ttach tqdm opencv3
-      ];
-      postPatch = ''
-               substituteInPlace requirements.txt --replace "opencv-python" ""
-             '';
-    };
     qudida = pfinal.buildPythonPackage rec {
       pname = "qudida";
       version = "0.0.4";
       src = pfinal.fetchPypi {
         inherit pname version;
-			  sha256 = "2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
-		  };
+        hash = "sha256-2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
+      };
+
       propagatedBuildInputs = with pfinal; [
-        numpy scikit-learn typing-extensions opencv3
+        numpy scikit-learn typing-extensions opencv4
       ];
+      nativeCheckInputs = [ pfinal.pytestCheckHook ];
+      doCheck = false;  # no tests in PyPI dist
+
       postPatch = ''
-               echo "numpy>=0.18.0" > requirements.txt
-               echo "scikit-learn>=0.19.1" >> requirements.txt
-               echo "typing-extensions" >> requirements.txt
-               substituteInPlace setup.py --replace \
-                 "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
-                 "install_requires=INSTALL_REQUIRES"
-             '';
+        echo "numpy>=0.18.0" > requirements.txt
+        echo "scikit-learn>=0.19.1" >> requirements.txt
+        echo "typing-extensions" >> requirements.txt
+        substituteInPlace setup.py --replace \
+          "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
+          "install_requires=INSTALL_REQUIRES"
+      '';
     };
-    # albumentations = pfinal.buildPythonPackage rec {
-    #    pname = "albumentations";
-    #    version = "1.1.0";
-    #    src = pfinal.fetchPypi {
-    #       inherit pname version;
-    #       sha256 = "YLBnswk5CLzFKtsqpdRPV+vbuKtXpHsLQvPcHTsc6CQ=";
-    #     };
-    #    propagatedBuildInputs = with pfinal; [
-    #      numpy scipy scikitimage pyyaml qudida torch torchvision imgaug
-	  #            ];
-	  #            checkInputs = [ pfinal.pytest ];
-    #    postPatch = ''
-    #      substituteInPlace setup.py --replace \
-    #        "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
-    #        "install_requires=INSTALL_REQUIRES"
-    #    '';
-    # };
     simpleitk = pfinal.buildPythonPackage rec {
       pname = "SimpleITK";
       version = "2.2.1";
@@ -149,7 +59,8 @@ old-pkgs: final: prev: {
         simpleitk deprecated nibabel click
         humanize scipy torch tqdm
       ];
-      checkInputs = with pfinal; [ pytest matplotlib ];
+      preCheck = ''export HOME=$(mktemp -d)'';
+      nativeCheckInputs = with pfinal; [ pytest matplotlib ];
       pythonImportsCheck = [ "torchio" ];
     };
     ipycanvas = pfinal.buildPythonPackage rec {
@@ -206,59 +117,6 @@ old-pkgs: final: prev: {
               substituteInPlace pyproject.toml --replace "psycopg2-binary" "psycopg2"
               '';
     };
-    interface_meta = pfinal.buildPythonPackage rec {
-      pname = "interface_meta";
-      version = "1.2.5";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "DIGRCsIAo0N5TbEwYndVkuTJbMnw1V6lOFzcOIlFsX0=";
-      };
-      propagatedBuildInputs = with pfinal; [ 
-        setupmeta
-      ];
-    };
-    formulaic = pfinal.buildPythonPackage rec {
-      pname = "formulaic";
-      version = "0.3.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "PhYmJWIUesve2hF413isGJqTvWPiNIJhvYtdMD8XP20=";
-      };
-      propagatedBuildInputs = with pfinal; [ 
-        astor interface_meta numpy pandas scipy wrapt
-      ];
-      checkInputs = with pfinal; [ pytestCheckHook sympy ];
-    };
-    # pybids = pfinal.buildPythonPackage rec {
-    #     version = "0.14.0";
-    #     pname = "pybids";
-
-    #     src = pfinal.fetchPypi {
-    #       inherit pname version;
-    #       sha256 = "73c4d03aad333f2a7cb4405abe96f55a33cffa4b5a2d23fad6ac5767c45562ef";
-    #     };
-
-    #     propagatedBuildInputs = with pfinal; [
-    #       click
-    #       num2words
-    #       numpy
-    #       scipy
-    #       pandas
-    #       nibabel
-    #       patsy
-    #       bids-validator
-    #       sqlalchemy
-    #       formulaic
-    #     ];
-
-    #     checkInputs = with pfinal; [ pytestCheckHook ];
-    #     pythonImportsCheck = [ "bids" ];
-    #     postPatch = ''
-    #       substituteInPlace setup.cfg --replace "formulaic ~=0.2.4" "formulaic"
-    #       substituteInPlace setup.cfg --replace "sqlalchemy <1.4.0.dev0" "sqlalchemy"
-    #       '';
-    #     doCheck = false;
-    # };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
       version = "0.3.5";
@@ -279,15 +137,15 @@ old-pkgs: final: prev: {
                           patchelf --set-rpath "${rpath}" "$lib"
                            '';       */   
     };
-	  mdai = pfinal.buildPythonPackage rec {
+    mdai = pfinal.buildPythonPackage rec {
       pname = "mdai";
       version = "0.12.2";
       src = pfinal.fetchPypi {
         inherit pname version;
         sha256 = "XC6n5fLMMQwkgSgxTyswUydGh+K6WqMzOJEkOZt0DPI=";
       };
-      nativeBuildInputs = [ final.patchelf final.poetry ];
-      propagatedBuildInputs = with pfinal; [ arrow matplotlib nibabel numpy opencv3 pandas pillow
+      nativeBuildInputs = [ final.patchelf pprev.poetry-core ];
+      propagatedBuildInputs = with pfinal; [ arrow matplotlib nibabel numpy opencv4 pandas pillow
 	                                           pydicom requests retrying scikitimage tqdm dicom2nifti
                                              pyyaml
                                            ];
@@ -295,46 +153,19 @@ old-pkgs: final: prev: {
       pythonImportsCheck = [ "mdai" ];
 
       postPatch = ''
-	    substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""
-	    '';
-    };
-    cmaes = pfinal.buildPythonPackage rec {
-      pname = "cmaes";
-      version = "0.8.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "HAS6I97ZJe8TuW9Cz71mepBepbgHVMdQ5kSLn82pal0=";
-      };
-      propagatedBuildInputs = with pfinal; [ numpy ];	     
-    };
-    pyorthanc = pfinal.buildPythonPackage rec {
-      pname = "pyorthanc";
-      version = "1.11.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "mw92w4VO6HnjKy8Qof8Hidr5MpX6Dom5jxmA5flswNk=";
-      };
-      postPatch = ''
-            substituteInPlace pyproject.toml --replace 'httpx = "^0.23.0"' ""
-            substituteInPlace setup.py --replace "'httpx>=0.23.0,<0.24.0'" "'httpx'"
-            substituteInPlace setup.py --replace "'pydicom>=2.3.0,<3.0.0'" "'pydicom'"
-            '';
-      propagatedBuildInputs = with pfinal; [ httpx pydicom requests ];
+        substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""
+      '';
     };
     optuna = with final; with pfinal; callPackage ./overlays/optuna/optuna.nix {};
-    evaluate = with final; with pfinal; callPackage ./overlays/evaluate {};
-    ipywidgets = with final; with pfinal; callPackage ./overlays/ipywidgets/ipywidgets.nix {};
-    widgetsnbextension = with final; with pfinal;
-      callPackage ./overlays/widgetsnbextension/widgetsnbextension.nix {};
-    nbconvert = with final; with pfinal; callPackage ./overlays/nbconvert/nbconvert.nix {};
-  };
-                                      };
-	charticles = with final; rPackages.buildRPackage {
-		name = "charticles";
-		src = fetchgit {
-		  url = "ssh://git@github.com/LKS-CHART/charticles";
-		  rev = "3bf371f";
-		  sha256 = "qYUpliKrEFM4PVOUrSfh/2Iffl898lL78zb9iVskc7c=";
-		};
-	};
+    #widgetsnbextension = with final; with pfinal;
+    #  callPackage ./overlays/widgetsnbextension/widgetsnbextension.nix {};
+    charticles = with final; rPackages.buildRPackage {
+      name = "charticles";
+      src = fetchgit {
+        url = "ssh://git@github.com/LKS-CHART/charticles";
+        rev = "3bf371f";
+        sha256 = "qYUpliKrEFM4PVOUrSfh/2Iffl898lL78zb9iVskc7c=";
+      };
+    };
+  }; };
 }

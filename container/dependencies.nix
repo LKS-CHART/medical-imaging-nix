@@ -25,7 +25,7 @@ let patched_rPackages =
   which
   curl wget
   zip unzip
-  pandoc
+  pandoc quarto
   dcm2niix dcmtk gdcm simpleitk ants
   cudaPackages.cudatoolkit
   snakemake
@@ -65,6 +65,7 @@ let patched_rPackages =
         avro
         backcall
         bleach
+        bokeh
         catboost
         certifi
         cffi
@@ -73,20 +74,24 @@ let patched_rPackages =
         cryptography
         cycler
         cython
+        dask
         datasets
         debugpy
         decorator
         defusedxml
+        deid
         #efficientnet-pytorch
         entrypoints
         evaluate
         einops
-        grad-cam
+        #grad-cam  # waiting for https://github.com/NixOS/nixpkgs/issues/220341
+        fastai
         greenlet
         h5py
         httplib2
         hupper
         idna
+        ignite
         imageio
         importlib-metadata
         ipykernel
@@ -98,6 +103,8 @@ let patched_rPackages =
         #nipype
         antspyx
         iso8601
+        jax
+        jaxlibWithCuda
         jedi
         jinja2
         joblib
@@ -127,6 +134,7 @@ let patched_rPackages =
         mdai
         nbclient
         nbconvert
+        nbdev
         nbformat
         nest-asyncio
         networkx
@@ -155,6 +163,7 @@ let patched_rPackages =
         protobuf
         ptyprocess
         pudb
+        #pycm
         pycparser
         pycrypto
         pydicom
@@ -178,6 +187,7 @@ let patched_rPackages =
         pyzmq
         qtconsole
         qtpy
+        qudida
         requests
         requests-cache
         requests_oauthlib
@@ -187,24 +197,30 @@ let patched_rPackages =
         scipy
         secretstorage
         send2trash
-        six
         slicer
         sqlalchemy
+        tables
         terminado
         terminaltables
         testpath
         text-unidecode
+        plotnine
+        polars
+        pymc3
         pytorchWithCuda
         pytorch-lightning
+        rising
+        simpleitk
+        seaborn
+        sentencepiece
+        siuba
+        skorch
+        statsmodels
         tensorflow
         tensorboardx
         torchvision
         torchmetrics
-        rising
-        simpleitk
-        seaborn
-        sentencepiece  # for transformers tokenizing
-        statsmodels
+        timm
         torchio
         tornado
         tqdm
