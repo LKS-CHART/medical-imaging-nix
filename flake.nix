@@ -2,14 +2,16 @@
   description = "A container and dev environment for medical imaging data science";
 
   # Nixpkgs / NixOS version to use.
-  inputs.nixpkgs.url = "nixpkgs/851558501d28bd3";
-  inputs.nixpkgs-old.url = "nixpkgs/4c3c80df545e";
-  inputs.nixGL.url = "github:guibou/nixGL";
-  inputs.nixGL.inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-old.url = "nixpkgs/4c3c80df545e";
+    nixGL.url = "github:guibou/nixGL";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs";
  
-  inputs.flake-compat = {
-    url = "github:edolstra/flake-compat";
-    flake = false;
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-old, nixGL, ... }:
@@ -19,7 +21,7 @@
       version = builtins.substring 0 8 self.lastModifiedDate;
 
       # System types to support.
-      supportedSystems = [ "x86_64-linux"  ];
+      supportedSystems = [ "x86_64-linux" ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
