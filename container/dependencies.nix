@@ -88,7 +88,6 @@ let patched_rPackages =
         importlib-metadata
         ipykernel
         ipython
-        ipython_genutils
         ipywidgets
         ipyvolume
         ipympl
@@ -101,32 +100,30 @@ let patched_rPackages =
         jedi
         jinja2
         joblib
-	json5
+        json5
         jsonschema
         jupyter
         jupyter-client
         jupyter_console
-        jupyter_core
         jupyterlab-pygments
         jupyterlab-widgets
         kafka-python
         kaggle
-	keras
+        keras
         keyring
         keyrings-alt
         kiwisolver
         lightgbm
-        lightning-utilities
         llvmlite
         markupsafe
         matplotlib
         mistune
         mlflow
-	monai
+        monai
         msgpack
         munch
         mysql-connector
-	mdai
+        mdai
         nbclient
         nbconvert
         nbformat
@@ -136,7 +133,7 @@ let patched_rPackages =
         numba
         numpy
         oauthlib
-	openpyxl
+        openpyxl
         #orthanc-rest-client
         packaging
         pandas
@@ -148,7 +145,7 @@ let patched_rPackages =
         #pfmisc
         pickleshare
         pillow
-	pip
+        pip
         plaster
         plaster-pastedeploy
         #pretrainedmodels
@@ -162,7 +159,7 @@ let patched_rPackages =
         pydicom
         pynetdicom
         pygments
-	pyodbc
+        pyodbc
         pyorthanc
         pyparsing
         #pypx
@@ -200,9 +197,11 @@ let patched_rPackages =
         tensorflow
         tensorboardx
         torchvision
-	torchmetrics
+        torchmetrics
+        rising
         simpleitk
         seaborn
+        statsmodels
         torchio
         tornado
         tqdm

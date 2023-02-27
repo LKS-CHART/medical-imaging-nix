@@ -308,7 +308,6 @@ old-pkgs: final: prev: {
     #       '';
     #     doCheck = false;
     # };
-    ipympl = pprev.ipympl.overrideAttrs (oa: {propagatedBuildInputs = oa.propagatedBuildInputs ++ [ pfinal.pillow pfinal.matplotlib ];});
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
       version = "0.3.5";
