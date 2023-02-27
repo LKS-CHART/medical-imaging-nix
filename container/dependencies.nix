@@ -85,7 +85,6 @@ let patched_rPackages =
         importlib-metadata
         ipykernel
         ipython
-        ipython_genutils
         ipywidgets
         ipyvolume
         ipympl
@@ -103,7 +102,6 @@ let patched_rPackages =
         jupyter
         jupyter-client
         jupyter_console
-        jupyter_core
         jupyterlab-pygments
         jupyterlab-widgets
         kafka-python
@@ -113,7 +111,6 @@ let patched_rPackages =
         keyrings-alt
         kiwisolver
         lightgbm
-        lightning-utilities
         llvmlite
         markupsafe
         matplotlib
