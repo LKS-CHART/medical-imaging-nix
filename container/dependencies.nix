@@ -195,8 +195,10 @@ let patched_rPackages =
         tensorboardx
         torchvision
         torchmetrics
+        rising
         simpleitk
         seaborn
+        statsmodels
         torchio
         tornado
         tqdm
