@@ -37,16 +37,19 @@ let patched_rPackages =
       packages = [
         R
         batchtools
+        data_table
         tidyverse
+        tidymodels
         reticulate
-	#charticles
+        #charticles
         keyring
         dbplyr
         RMariaDB
         pROC
         distr
-	lenses
-	openxlsx
+        lenses
+        openxlsx
+        wrapr
       ];
     })
     (python310.withPackages (ps: with ps; [
