@@ -97,7 +97,7 @@ let patched_rPackages =
         jedi
         jinja2
         joblib
-	json5
+        json5
         jsonschema
         jupyter
         jupyter-client
@@ -106,7 +106,7 @@ let patched_rPackages =
         jupyterlab-widgets
         kafka-python
         kaggle
-	keras
+        keras
         keyring
         keyrings-alt
         kiwisolver
@@ -116,11 +116,11 @@ let patched_rPackages =
         matplotlib
         mistune
         mlflow
-	monai
+        monai
         msgpack
         munch
         mysql-connector
-	mdai
+        mdai
         nbclient
         nbconvert
         nbformat
@@ -130,7 +130,7 @@ let patched_rPackages =
         numba
         numpy
         oauthlib
-	openpyxl
+        openpyxl
         #orthanc-rest-client
         packaging
         pandas
@@ -142,7 +142,7 @@ let patched_rPackages =
         #pfmisc
         pickleshare
         pillow
-	pip
+        pip
         plaster
         plaster-pastedeploy
         #pretrainedmodels
@@ -156,7 +156,7 @@ let patched_rPackages =
         pydicom
         pynetdicom
         pygments
-	pyodbc
+        pyodbc
         pyorthanc
         pyparsing
         #pypx
@@ -194,7 +194,7 @@ let patched_rPackages =
         tensorflow
         tensorboardx
         torchvision
-	torchmetrics
+        torchmetrics
         simpleitk
         seaborn
         torchio
