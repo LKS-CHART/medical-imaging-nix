@@ -89,11 +89,9 @@ let patched_rPackages =
         ipykernel
         ipython
         ipywidgets
-        ipyvolume
         ipympl
         ipyannotations
         superintendent
-        niwidgets
         #nipype
         antspyx
         iso8601
