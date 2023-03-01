@@ -152,55 +152,6 @@ old-pkgs: final: prev: {
       checkInputs = with pfinal; [ pytest matplotlib ];
       pythonImportsCheck = [ "torchio" ];
     };
-    pythreejs = pfinal.buildPythonPackage rec {
-      pname = "pythreejs";
-      version = "2.4.1";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "C6UGOnYxLEX2XDds5F9a8zGZSEtM56WeeRrYxNdGqGc=";
-      };
-      propagatedBuildInputs = with pfinal; [ ipywidgets ipydatawidgets  ];
-      doCheck = false;
-    };
-    ipywebrtc = pfinal.buildPythonPackage rec {
-      pname = "ipywebrtc";
-      version = "0.6.0";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "+Kw8wCs2M7WfOIrvZ5Yc/1f5ACj9MDuziGxjw9Yx2hM=";
-      };
-      propagatedBuildInputs = with pfinal; [ jupyter-packaging ];
-      checkInputs = with pfinal; [ ipython ipywidgets ];
-    };
-    ipyvolume = pfinal.buildPythonPackage rec {
-      pname = "ipyvolume";
-      version = "0.5.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "Gcve6i2InNG7cPe4L4FIM60LPRFcgXHXt4YIUdj7vSY=";
-      };
-      propagatedBuildInputs = with pfinal; [ ipywidgets pythreejs ipywebrtc pillow requests ];
-      checkInputs = with pfinal; [ pytest ];
-      doCheck = false; # tries to do some headless browsing
-    };
-    niwidgets = pfinal.buildPythonPackage rec {
-      pname = "niwidgets";
-      version = "0.2.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "Qq98crGNaNl4NcjAW1uFf8CzQTzUJ/26kSWzRsLSc2o=";
-      };
-      propagatedBuildInputs = with pfinal; [ 
-        nibabel nilearn ipywidgets ipyvolume matplotlib
-        numpy scipy scikit-learn
-      ];
-      postPatch = ''
-              substituteInPlace setup.py --replace "nilearn>=0.5.2,<0.6.0" "nilearn"
-              substituteInPlace setup.py --replace "scikit-learn>=0.20.3,<0.21.0" "scikit-learn"
-              substituteInPlace setup.py --replace "nibabel>=2.4,<3.0" "nibabel"
-              substituteInPlace setup.py --replace "ipywidgets>=7.4,<8.0" "ipywidgets"
-              '';
-    };
     ipycanvas = pfinal.buildPythonPackage rec {
       pname = "ipycanvas";
       version = "0.11.0";
