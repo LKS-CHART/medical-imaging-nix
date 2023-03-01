@@ -207,6 +207,7 @@ let patched_rPackages =
         tqdm
         traitlets
         transaction
+        transformers
         translationstring
         ttach
         typing-extensions
