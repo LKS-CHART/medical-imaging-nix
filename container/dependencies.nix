@@ -73,6 +73,7 @@ let patched_rPackages =
         cryptography
         cycler
         cython
+        datasets
         decorator
         defusedxml
         #efficientnet-pytorch
@@ -199,6 +200,7 @@ let patched_rPackages =
         rising
         simpleitk
         seaborn
+        sentencepiece  # for transformers tokenizing
         statsmodels
         torchio
         tornado
