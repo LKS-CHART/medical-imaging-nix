@@ -78,6 +78,7 @@ let patched_rPackages =
         defusedxml
         #efficientnet-pytorch
         entrypoints
+        evaluate
         einops
         grad-cam
         greenlet
