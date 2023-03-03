@@ -322,6 +322,7 @@ old-pkgs: final: prev: {
       propagatedBuildInputs = with pfinal; [ httpx pydicom requests ];
     };
     optuna = with final; with pfinal; callPackage ./overlays/optuna/optuna.nix {};
+    evaluate = with final; with pfinal; callPackage ./overlays/evaluate {};
     ipywidgets = with final; with pfinal; callPackage ./overlays/ipywidgets/ipywidgets.nix {};
     widgetsnbextension = with final; with pfinal;
       callPackage ./overlays/widgetsnbextension/widgetsnbextension.nix {};
