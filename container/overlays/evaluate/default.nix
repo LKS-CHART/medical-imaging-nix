@@ -25,6 +25,7 @@
 , pythonOlder
 , pythonRelaxDepsHook
 , pytestCheckHook
+, cookiecutter
 , datasets
 , dill
 , fsspec
@@ -58,6 +59,7 @@ buildPythonPackage rec {
   pythonRelaxDeps = [ "responses" ];
 
   propagatedBuildInputs = [
+    cookiecutter
     datasets
     numpy
     dill
