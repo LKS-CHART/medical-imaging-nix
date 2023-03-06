@@ -74,6 +74,7 @@ let patched_rPackages =
         cycler
         cython
         datasets
+        debugpy
         decorator
         defusedxml
         #efficientnet-pytorch
@@ -178,6 +179,7 @@ let patched_rPackages =
         qtconsole
         qtpy
         requests
+        requests-cache
         requests_oauthlib
         rpy2
         scikitimage
