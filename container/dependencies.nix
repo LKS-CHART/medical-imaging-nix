@@ -19,7 +19,7 @@ let patched_rPackages =
   watch
   openssl
   bashInteractive
-  git gdown
+  git gdown git-annex git-lfs datalad
   openssh
   less
   which
