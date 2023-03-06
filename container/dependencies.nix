@@ -74,6 +74,7 @@ let patched_rPackages =
         cycler
         cython
         datasets
+        debugpy
         decorator
         defusedxml
         #efficientnet-pytorch
