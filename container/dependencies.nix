@@ -179,6 +179,7 @@ let patched_rPackages =
         qtconsole
         qtpy
         requests
+        requests-cache
         requests_oauthlib
         rpy2
         scikitimage
