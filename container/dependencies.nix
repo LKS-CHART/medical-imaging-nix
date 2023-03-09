@@ -112,7 +112,7 @@ let patched_rPackages =
         kaggle
         keras
         keyring
-        keyrings-alt
+        keyrings-cryptfile
         kiwisolver
         lightgbm
         llvmlite
