@@ -87,6 +87,7 @@ let patched_rPackages =
         httplib2
         hupper
         idna
+        ignite
         imageio
         importlib-metadata
         ipykernel
@@ -127,6 +128,7 @@ let patched_rPackages =
         mdai
         nbclient
         nbconvert
+        nbdev
         nbformat
         nest-asyncio
         networkx
@@ -178,6 +180,7 @@ let patched_rPackages =
         pyzmq
         qtconsole
         qtpy
+        qudida
         requests
         requests-cache
         requests_oauthlib
@@ -187,7 +190,6 @@ let patched_rPackages =
         scipy
         secretstorage
         send2trash
-        six
         slicer
         sqlalchemy
         terminado
@@ -205,6 +207,7 @@ let patched_rPackages =
         seaborn
         sentencepiece  # for transformers tokenizing
         statsmodels
+        timm
         torchio
         tornado
         tqdm

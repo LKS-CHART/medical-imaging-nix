@@ -195,8 +195,6 @@ networkx
 nibabel
 nilearn
 nipype
-niwidgets
-nose
 notebook
 numba
 numpy
