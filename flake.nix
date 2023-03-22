@@ -2,36 +2,39 @@
   description = "A container and dev environment for medical imaging data science";
 
   # Nixpkgs / NixOS version to use.
-  inputs.nixpkgs.url = "nixpkgs/851558501d28bd3";
-  inputs.nixpkgs-old.url = "nixpkgs/4c3c80df545e";
-  inputs.nixGL.url = "github:guibou/nixGL";
-  inputs.nixGL.inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixGL.url = "github:guibou/nixGL";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs";
  
-  inputs.flake-compat = {
-    url = "github:edolstra/flake-compat";
-    flake = false;
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-old, nixGL, ... }:
+  outputs = { self, nixpkgs, nixGL, ... }:
     let
 
       # Generate a user-friendly version number.
       version = builtins.substring 0 8 self.lastModifiedDate;
 
       # System types to support.
-      supportedSystems = [ "x86_64-linux"  ];
+      supportedSystems = [ "x86_64-linux" ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      pkgsOverlay = forAllSystems (system: import ./container/overlay.nix (import nixpkgs-old {inherit system;}));
+      pkgsOverlay = forAllSystems (system: import ./container/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (
         system: import nixpkgs { 
           inherit system; 
-          config.allowUnfree = true; 
-          overlays = [ pkgsOverlay.${system} nixGL.overlay ];  
+          config.allowUnfree = true;
+          #config.cudaSupport = true;  # waiting on https://github.com/NixOS/nixpkgs/issues/220341
+          config.cudaCapabilities = [ "7.5" ];
+          overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
         });
 
       # Import the relevant dependencies
