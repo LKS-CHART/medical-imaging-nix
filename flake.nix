@@ -57,7 +57,7 @@
           path = ./template;
           description = "A flake for medical imaging AI";
         };};
-      defaultPackage = forAllSystems (system: self.packages.${system}.container);
+      defaultPackage = forAllSystems (system: self.devShell.${system});
       defaultTemplate = self.templates.mi-flake;
     };
 }
