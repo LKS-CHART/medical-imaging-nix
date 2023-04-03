@@ -17,10 +17,17 @@ nix develop #on a large shared machine you might want to run nix --cores=<some n
 the first time you run this it will take a very long time, because it will build most of the software universe from
 scratch for you, including pytorch and tensorflow, let it run overnight. But after that all subsequent calls
 to nix develop will drop you into your shiny new environment. If you're ready to package up your environment into
-a container you can run
+a container you can run:
+
+```sh
+nix build .#container
+```
+
+this takes a bit of time, so maybe start it before your next meeting.
+
+And if you want to protect the packages in your environment from garbage collection you can
+run:
 
 ```sh
 nix build
 ```
-
-this takes a bit of time, so maybe start it before your next meeting.
