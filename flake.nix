@@ -59,9 +59,9 @@
         });
       packages = forAllSystems (
         system: { 
-          container = import ./container/mk-container.nix {pkgs = nixpkgsFor.${system}; 
-                                                           contents = contentsFor.${system}; 
-                                                          };
+          singularity = import ./container/mk-singularity.nix {pkgs = nixpkgsFor.${system}; 
+                                                               contents = contentsFor.${system}; 
+                                                              };
           docker = import ./container/mk-docker.nix {pkgs = nixpkgsFor.${system};
                                                      contents = contentsFor.${system};
                                                     };
