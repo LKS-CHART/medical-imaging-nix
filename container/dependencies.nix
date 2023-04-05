@@ -6,13 +6,13 @@ let patched_rPackages =
    rPackages.override { overrides = {
      xml2 = rPackages.xml2.overrideDerivation (a: { installFlags = a.installFlags ++ ["--no-lock"]; })
      ;} ;};
-    relevant_drivers =
+    relevantDrivers =
       with builtins; filter (e: elem e.version (nvidiaDrivers ++ [defaultNvidiaDriver])) nixgl.knownNvidiaDrivers;
     glWrappers =
       builtins.map (d:
         (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
-        relevant_drivers;
-    defaultDriver = with builtins; head (filter (e: e.version == defaultNvidiaDriver) relevant_drivers);
+        relevantDrivers;
+    defaultDriver = with builtins; head (filter (e: e.version == defaultNvidiaDriver) relevantDrivers);
     defaultGlWrapper =
       (nixgl.override {nvidiaVersion = defaultDriver.version; nvidiaHash = defaultDriver.sha256; }).nixGLNvidia;
    in
