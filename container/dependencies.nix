@@ -2,20 +2,17 @@
 
 with pkgs;
 
-let patched_rPackages =
-   rPackages.override { overrides = {
-     xml2 = rPackages.xml2.overrideDerivation (a: { installFlags = a.installFlags ++ ["--no-lock"]; })
-     ;} ;};
-    relevantDrivers =
-      with builtins; filter (e: elem e.version (nvidiaDrivers ++ [defaultNvidiaDriver])) nixgl.knownNvidiaDrivers;
-    glWrappers =
-      builtins.map (d:
-        (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
-        relevantDrivers;
-    defaultDriver = with builtins; head (filter (e: e.version == defaultNvidiaDriver) relevantDrivers);
-    defaultGlWrapper =
-      (nixgl.override {nvidiaVersion = defaultDriver.version; nvidiaHash = defaultDriver.sha256; }).nixGLNvidia;
-   in
+let
+  relevantDrivers =
+    with builtins; filter (e: elem e.version (nvidiaDrivers ++ [defaultNvidiaDriver])) nixgl.knownNvidiaDrivers;
+  glWrappers =
+    builtins.map (d:
+      (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
+      relevantDrivers;
+  defaultDriver = with builtins; head (filter (e: e.version == defaultNvidiaDriver) relevantDrivers);
+  defaultGlWrapper =
+    (nixgl.override {nvidiaVersion = defaultDriver.version; nvidiaHash = defaultDriver.sha256; }).nixGLNvidia;
+in
 [
   coreutils
   stdenv
@@ -40,7 +37,7 @@ let patched_rPackages =
   snakemake ] ++ glWrappers ++ [
   (nixgl.nixGLCommon defaultGlWrapper)
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
-  (with patched_rPackages;
+  (with rPackages;
     # rWrapper bakes R_SITE_LIBS into the intepretter
     rWrapper.override {
       packages = [
