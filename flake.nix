@@ -4,7 +4,8 @@
   # Nixpkgs / NixOS version to use.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixGL.url = "github:guibou/nixGL";
+    #nixGL.url = "github:guibou/nixGL";
+    nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
  
     flake-compat = {
@@ -22,6 +23,10 @@
       # System types to support.
       supportedSystems = [ "x86_64-linux" ];
 
+      # Nvidia drivers to support
+      supportedNvidiaDrivers = [ "470.103.01" "470.161.03" ];
+      defaultNvidiaDriver = builtins.elemAt supportedNvidiaDrivers 0;        
+
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
@@ -38,7 +43,12 @@
         });
 
       # Import the relevant dependencies
-      contentsFor = forAllSystems (system: import ./container/dependencies.nix { pkgs = nixpkgsFor.${system}; });
+      contentsFor = forAllSystems
+        (system: import ./container/dependencies.nix {
+          pkgs = nixpkgsFor.${system};
+          nvDrivers = supportedNvidiaDrivers;
+          defaultNvDriver = defaultNvidiaDriver;
+        });
 
     in
 

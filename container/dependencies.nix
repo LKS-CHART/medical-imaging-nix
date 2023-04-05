@@ -1,11 +1,20 @@
-{ pkgs }:
+{ pkgs, nvDrivers, defaultNvDriver }:
 
 with pkgs;
 
 let patched_rPackages =
    rPackages.override { overrides = {
      xml2 = rPackages.xml2.overrideDerivation (a: { installFlags = a.installFlags ++ ["--no-lock"]; })
-   ;} ;};
+     ;} ;};
+    relevant_drivers =
+      with builtins; filter (e: elem e.version (nvDrivers ++ [defaultNvDriver])) nixgl.knownNvidiaDrivers;
+    glWrappers =
+      builtins.map (d:
+        (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
+        relevant_drivers;
+    defaultDriver = with builtins; head (filter (e: e.version == defaultNvDriver) relevant_drivers);
+    defaultGlWrapper =
+      (nixgl.override {nvidiaVersion = defaultDriver.version; nvidiaHash = defaultDriver.sha256; }).nixGLNvidia;
    in
 [
   coreutils
@@ -28,8 +37,8 @@ let patched_rPackages =
   pandoc quarto
   dcm2niix dcmtk gdcm simpleitk ants
   cudaPackages.cudatoolkit
-  snakemake
-  (nixgl.nvidiaPackages { version = "470.103.01"; sha256 = "19c7r3nrdi48vkzg6ykj7hfkgmvm49xhydj61hxlc4y2i6gk1hjn"; }).nixGLNvidia
+  snakemake ] ++ glWrappers ++ [
+  (nixgl.nixGLCommon defaultGlWrapper)
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (with patched_rPackages;
     # rWrapper bakes R_SITE_LIBS into the intepretter
