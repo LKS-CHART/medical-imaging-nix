@@ -46,8 +46,8 @@
       contentsFor = forAllSystems
         (system: import ./container/dependencies.nix {
           pkgs = nixpkgsFor.${system};
-          nvDrivers = supportedNvidiaDrivers;
-          defaultNvDriver = defaultNvidiaDriver;
+          nvidiaDrivers = supportedNvidiaDrivers;
+          defaultNvidiaDriver = defaultNvidiaDriver;
         });
 
     in
