@@ -50,8 +50,12 @@
       packages = forAllSystems (
         system: { 
           container = import ./container/mk-container.nix {pkgs = nixpkgsFor.${system}; 
-          contents = contentsFor.${system}; 
-        };});
+                                                           contents = contentsFor.${system}; 
+                                                          };
+          docker = import ./container/mk-docker.nix {pkgs = nixpkgsFor.${system};
+                                                     contents = contentsFor.${system};
+                                                    };
+        });
       templates = {
         mi-flake = {
           path = ./template;
