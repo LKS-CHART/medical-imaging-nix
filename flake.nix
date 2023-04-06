@@ -29,7 +29,7 @@
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      pkgsOverlay = forAllSystems (system: import ./container/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
+      pkgsOverlay = forAllSystems (system: import ./src/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (
@@ -43,7 +43,7 @@
 
       # Import the relevant dependencies
       contentsFor = forAllSystems
-        (system: import ./container/dependencies.nix {
+        (system: import ./src/dependencies.nix {
           pkgs = nixpkgsFor.${system};
           nvidiaDrivers = supportedNvidiaDrivers;
         });
@@ -52,15 +52,15 @@
 
     {
       devShell = forAllSystems (
-        system: import ./container/devenv.nix { 
+        system: import ./src/devenv.nix { 
           pkgs = nixpkgsFor.${system}; contents = contentsFor.${system}; 
         });
       packages = forAllSystems (
         system: { 
-          singularity = import ./container/mk-singularity.nix {pkgs = nixpkgsFor.${system}; 
+          singularity = import ./src/mk-singularity.nix {pkgs = nixpkgsFor.${system}; 
                                                                contents = contentsFor.${system}; 
                                                               };
-          docker = import ./container/mk-docker.nix {pkgs = nixpkgsFor.${system};
+          docker = import ./src/mk-docker.nix {pkgs = nixpkgsFor.${system};
                                                      contents = contentsFor.${system};
                                                     };
         });
