@@ -14,6 +14,12 @@ pkgs.writeTextFile rec {
     exit 1
   fi
 
+  if ! command -v nixGLNvidia-"$vers" &> /dev/null; then
+    echo -n "nixGLNvidia wrapper not found for $vers, it likely was not included "
+    echo "in supportedNvidiaDrivers when this environment was built."
+    exit 1
+  fi
+
   exec nixGLNvidia-"$vers" "$@"  
   '';
   executable = true;
