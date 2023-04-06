@@ -1,12 +1,16 @@
-{ pkgs }:
+{ pkgs, nvidiaDrivers }:
 
 with pkgs;
 
-let patched_rPackages =
-   rPackages.override { overrides = {
-     xml2 = rPackages.xml2.overrideDerivation (a: { installFlags = a.installFlags ++ ["--no-lock"]; })
-   ;} ;};
-   in
+let
+  relevantDrivers =
+    with builtins; filter (e: elem e.version nvidiaDrivers) nixgl.knownNvidiaDrivers;
+  glWrappers =
+    builtins.map (d:
+      (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
+      relevantDrivers;
+  autoGlWrapper = import ./glWrapper.nix {inherit pkgs; };
+in
 [
   coreutils
   stdenv
@@ -28,10 +32,10 @@ let patched_rPackages =
   pandoc quarto
   dcm2niix dcmtk gdcm simpleitk ants
   cudaPackages.cudatoolkit
-  snakemake
-  (nixgl.nvidiaPackages { version = "470.103.01"; sha256 = "19c7r3nrdi48vkzg6ykj7hfkgmvm49xhydj61hxlc4y2i6gk1hjn"; }).nixGLNvidia
+  snakemake ] ++ glWrappers ++ [
+  autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
-  (with patched_rPackages;
+  (with rPackages;
     # rWrapper bakes R_SITE_LIBS into the intepretter
     rWrapper.override {
       packages = [

@@ -4,7 +4,8 @@
   # Nixpkgs / NixOS version to use.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixGL.url = "github:guibou/nixGL";
+    #nixGL.url = "github:guibou/nixGL";
+    nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
  
     flake-compat = {
@@ -22,10 +23,13 @@
       # System types to support.
       supportedSystems = [ "x86_64-linux" ];
 
+      # Nvidia drivers to support
+      supportedNvidiaDrivers = [ "470.103.01" "470.161.03" ];
+
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      pkgsOverlay = forAllSystems (system: import ./container/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
+      pkgsOverlay = forAllSystems (system: import ./src/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (
@@ -38,20 +42,28 @@
         });
 
       # Import the relevant dependencies
-      contentsFor = forAllSystems (system: import ./container/dependencies.nix { pkgs = nixpkgsFor.${system}; });
+      contentsFor = forAllSystems
+        (system: import ./src/dependencies.nix {
+          pkgs = nixpkgsFor.${system};
+          nvidiaDrivers = supportedNvidiaDrivers;
+        });
 
     in
 
     {
       devShell = forAllSystems (
-        system: import ./container/devenv.nix { 
+        system: import ./src/devenv.nix { 
           pkgs = nixpkgsFor.${system}; contents = contentsFor.${system}; 
         });
       packages = forAllSystems (
         system: { 
-          container = import ./container/mk-container.nix {pkgs = nixpkgsFor.${system}; 
-          contents = contentsFor.${system}; 
-        };});
+          singularity = import ./src/mk-singularity.nix {pkgs = nixpkgsFor.${system}; 
+                                                               contents = contentsFor.${system}; 
+                                                              };
+          docker = import ./src/mk-docker.nix {pkgs = nixpkgsFor.${system};
+                                                     contents = contentsFor.${system};
+                                                    };
+        });
       templates = {
         mi-flake = {
           path = ./template;

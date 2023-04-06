@@ -20,7 +20,7 @@ to nix develop will drop you into your shiny new environment. If you're ready to
 a container you can run:
 
 ```sh
-nix build .#container
+nix build .#singularity
 ```
 
 this takes a bit of time, so maybe start it before your next meeting.

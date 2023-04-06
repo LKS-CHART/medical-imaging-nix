@@ -8,8 +8,9 @@
      forAllSystems = mi-flake.inputs.nixpkgs.lib.genAttrs supportedSystems;
    in
      {devShell = forAllSystems (system: mi-flake.devShell.${system});
-      packages = forAllSystems (system: { container = mi-flake.packages.${system}.container;
-                                          contents = mi-flake.packages.${system}.contents; });
-      defaultPackage = forAllSystems (system: self.packages.${system}.container);
+      packages = forAllSystems (system: { docker = mi-flake.packages.${system}.docker;
+                                          singularity = mi-flake.packages.${system}.singularity;
+                                        });
+      defaultPackage = forAllSystems (system: self.defaultPackage.${system});
      };
 }

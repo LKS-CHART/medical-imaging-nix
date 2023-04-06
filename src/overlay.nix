@@ -130,12 +130,6 @@ old-pkgs: final: prev: {
                                            ];
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
-
-      /*postFixup = let rpath = final.lib.makeLibraryPath [ final.stdenv.cc.cc.lib ];
-                        in ''
-                          lib=$out/${pfinal.python.sitePackages}/SimpleITK/_SimpleITK.cpython-39-x86_64-linux-gnu.so
-                          patchelf --set-rpath "${rpath}" "$lib"
-                           '';       */   
     };
     mdai = pfinal.buildPythonPackage rec {
       pname = "mdai";
@@ -156,9 +150,6 @@ old-pkgs: final: prev: {
         substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""
       '';
     };
-    optuna = with final; with pfinal; callPackage ./overlays/optuna/optuna.nix {};
-    #widgetsnbextension = with final; with pfinal;
-    #  callPackage ./overlays/widgetsnbextension/widgetsnbextension.nix {};
     charticles = with final; rPackages.buildRPackage {
       name = "charticles";
       src = fetchgit {
