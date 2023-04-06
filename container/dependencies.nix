@@ -1,17 +1,15 @@
-{ pkgs, nvidiaDrivers, defaultNvidiaDriver }:
+{ pkgs, nvidiaDrivers }:
 
 with pkgs;
 
 let
   relevantDrivers =
-    with builtins; filter (e: elem e.version (nvidiaDrivers ++ [defaultNvidiaDriver])) nixgl.knownNvidiaDrivers;
+    with builtins; filter (e: elem e.version nvidiaDrivers) nixgl.knownNvidiaDrivers;
   glWrappers =
     builtins.map (d:
       (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
       relevantDrivers;
-  defaultDriver = with builtins; head (filter (e: e.version == defaultNvidiaDriver) relevantDrivers);
-  defaultGlWrapper =
-    (nixgl.override {nvidiaVersion = defaultDriver.version; nvidiaHash = defaultDriver.sha256; }).nixGLNvidia;
+  autoGlWrapper = import ./glWrapper.nix {inherit pkgs; };
 in
 [
   coreutils
@@ -35,7 +33,7 @@ in
   dcm2niix dcmtk gdcm simpleitk ants
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
-  (nixgl.nixGLCommon defaultGlWrapper)
+  autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (with rPackages;
     # rWrapper bakes R_SITE_LIBS into the intepretter

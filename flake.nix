@@ -25,7 +25,6 @@
 
       # Nvidia drivers to support
       supportedNvidiaDrivers = [ "470.103.01" "470.161.03" ];
-      defaultNvidiaDriver = builtins.elemAt supportedNvidiaDrivers 0;        
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -47,7 +46,6 @@
         (system: import ./container/dependencies.nix {
           pkgs = nixpkgsFor.${system};
           nvidiaDrivers = supportedNvidiaDrivers;
-          defaultNvidiaDriver = defaultNvidiaDriver;
         });
 
     in
