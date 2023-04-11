@@ -156,6 +156,8 @@ in
         pbkdf2
         pexpect
         #pfmisc
+        pgnotify
+        psycopg2
         pickleshare
         pillow
         pip
