@@ -31,23 +31,6 @@ old-pkgs: final: prev: {
           "install_requires=INSTALL_REQUIRES"
       '';
     };
-    simpleitk = pfinal.buildPythonPackage rec {
-      pname = "SimpleITK";
-      version = "2.2.1";
-      src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/ff/0b/2e078bb5fe33f7fef38bdeb882c23bc73782aecc66bb08047834c5c4a99c/SimpleITK-2.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        sha256 = "f5Y6cV7uKu2VzJoLcGYjGwlE+F6Z9lzA4hahWikcQyA=";
-      };
-      nativeBuildInputs = [ final.patchelf ];
-      format = "wheel";
-      pythonImportsCheck = [ "SimpleITK" ];
-
-      postFixup = let rpath = final.lib.makeLibraryPath [ final.stdenv.cc.cc.lib ];
-                  in ''
-                          lib=$out/${pfinal.python.sitePackages}/SimpleITK/_SimpleITK.cpython-310-x86_64-linux-gnu.so
-                          patchelf --set-rpath "${rpath}" "$lib"
-                           '';          
-    };
     torchio = pfinal.buildPythonPackage rec {
       pname = "torchio";
       version = "0.18.75";
