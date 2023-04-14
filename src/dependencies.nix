@@ -30,7 +30,7 @@ in
   curl wget
   zip unzip
   pandoc quarto
-  dcm2niix dcmtk gdcm simpleitk ants
+  dcm2niix dcmtk gdcm ants
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
   autoGlWrapper
@@ -42,6 +42,7 @@ in
         R
         batchtools
         data_table
+        forecast
         tidyverse
         tidymodels
         reticulate
@@ -49,26 +50,31 @@ in
         keyring
         dbplyr
         RMariaDB
+        pins
         pROC
         distr
         lenses
         openxlsx
+        vetiver
         wrapr
       ];
     })
     (python310.withPackages (ps: with ps; [
+        #accelerate
         addict
         #apex
         #apiron
         argon2_cffi
         argon2-cffi-bindings
-        arviz
+        #arviz
         asn1crypto
         async_generator
         attrs
         avro
         backcall
+        batchgenerators
         bleach
+        bitsandbytes
         bokeh
         catboost
         certifi
@@ -80,6 +86,7 @@ in
         cython
         dask
         datasets
+        dicom2nifti
         debugpy
         decorator
         defusedxml
@@ -88,10 +95,11 @@ in
         entrypoints
         evaluate
         einops
-        #grad-cam  # waiting for https://github.com/NixOS/nixpkgs/issues/220341
+        grad-cam
         fastai
         greenlet
         h5py
+        heudiconv
         httplib2
         hupper
         idna
@@ -104,11 +112,11 @@ in
         ipympl
         ipyannotations
         superintendent
-        #nipype
+        nibabel
+        nipype
         antspyx
         iso8601
         jax
-        jaxlibWithCuda
         jedi
         jinja2
         joblib
@@ -154,6 +162,7 @@ in
         parso
         PasteDeploy
         pbkdf2
+        #peft
         pexpect
         #pfmisc
         pgnotify
@@ -198,12 +207,13 @@ in
         requests-cache
         requests_oauthlib
         rpy2
+        safetensors
         scikitimage
         scikit-learn
         scipy
         secretstorage
         send2trash
-        slicer
+        #slicer
         sqlalchemy
         tables
         terminado
@@ -212,21 +222,21 @@ in
         text-unidecode
         plotnine
         polars
-        pymc3
-        pytorchWithCuda
+        #pymc
+        torch
         pytorch-lightning
         rising
         simpleitk
         seaborn
         sentencepiece
-        siuba
-        skorch
+        #siuba
+        #skorch
         statsmodels
         tensorflow
         tensorboardx
         torchvision
         torchmetrics
-        timm
+        #timm
         torchio
         tornado
         tqdm
