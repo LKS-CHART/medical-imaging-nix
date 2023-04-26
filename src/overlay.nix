@@ -1,13 +1,5 @@
 old-pkgs: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
-    # remove `torch` and `tensorflow` overrides when config.enableCuda is set
-    # after https://github.com/NixOS/nixpkgs/issues/220341 is resolved
-    torch = pprev.torch.override {
-      cudaSupport = true;
-    };
-    tensorflow = pprev.tensorflow-build.override ({
-      cudaSupport = true;
-    });
     qudida = pfinal.buildPythonPackage rec {
       pname = "qudida";
       version = "0.0.4";
@@ -30,38 +22,6 @@ old-pkgs: final: prev: {
           "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
           "install_requires=INSTALL_REQUIRES"
       '';
-    };
-    simpleitk = pfinal.buildPythonPackage rec {
-      pname = "SimpleITK";
-      version = "2.2.1";
-      src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/ff/0b/2e078bb5fe33f7fef38bdeb882c23bc73782aecc66bb08047834c5c4a99c/SimpleITK-2.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        sha256 = "f5Y6cV7uKu2VzJoLcGYjGwlE+F6Z9lzA4hahWikcQyA=";
-      };
-      nativeBuildInputs = [ final.patchelf ];
-      format = "wheel";
-      pythonImportsCheck = [ "SimpleITK" ];
-
-      postFixup = let rpath = final.lib.makeLibraryPath [ final.stdenv.cc.cc.lib ];
-                  in ''
-                          lib=$out/${pfinal.python.sitePackages}/SimpleITK/_SimpleITK.cpython-310-x86_64-linux-gnu.so
-                          patchelf --set-rpath "${rpath}" "$lib"
-                           '';          
-    };
-    torchio = pfinal.buildPythonPackage rec {
-      pname = "torchio";
-      version = "0.18.75";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "OjrVQTMcgW+sBwL9IqeLtqtv+CQsP+lu5t5fyGti0EU=";
-      };
-      propagatedBuildInputs = with pfinal; [
-        simpleitk deprecated nibabel click
-        humanize scipy torch tqdm
-      ];
-      preCheck = ''export HOME=$(mktemp -d)'';
-      nativeCheckInputs = with pfinal; [ pytest matplotlib ];
-      pythonImportsCheck = [ "torchio" ];
     };
     ipycanvas = pfinal.buildPythonPackage rec {
       pname = "ipycanvas";

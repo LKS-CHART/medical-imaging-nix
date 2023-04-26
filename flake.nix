@@ -3,7 +3,7 @@
 
   # Nixpkgs / NixOS version to use.
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     #nixGL.url = "github:guibou/nixGL";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +36,7 @@
         system: import nixpkgs { 
           inherit system; 
           config.allowUnfree = true;
-          #config.cudaSupport = true;  # waiting on https://github.com/NixOS/nixpkgs/issues/220341
+          config.cudaSupport = true;
           config.cudaCapabilities = [ "7.5" ];
           overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
         });
