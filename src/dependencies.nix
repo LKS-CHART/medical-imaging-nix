@@ -60,7 +60,7 @@ in
       ];
     })
     (python310.withPackages (ps: with ps; [
-        #accelerate
+        accelerate
         addict
         #apex
         #apiron
@@ -96,7 +96,7 @@ in
         evaluate
         einops
         grad-cam
-        fastai
+        #fastai
         greenlet
         h5py
         heudiconv
@@ -108,9 +108,10 @@ in
         importlib-metadata
         ipykernel
         ipython
-        ipywidgets
+        ipyniivue
         ipympl
         ipyannotations
+        ipywidgets
         superintendent
         nibabel
         nipype
@@ -162,7 +163,7 @@ in
         parso
         PasteDeploy
         pbkdf2
-        #peft
+        peft
         pexpect
         #pfmisc
         pgnotify
@@ -178,10 +179,11 @@ in
         protobuf
         ptyprocess
         pudb
-        #pycm
+        pycm
         pycparser
         pycrypto
         pydicom
+        dicomweb-client
         pynetdicom
         pygments
         pyodbc
