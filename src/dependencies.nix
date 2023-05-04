@@ -23,7 +23,7 @@ in
   watch
   openssl
   bashInteractive
-  git gdown git-annex git-lfs datalad
+  git gdown git-annex git-lfs datalad dvc
   openssh
   less
   which
@@ -118,6 +118,7 @@ in
         antspyx
         iso8601
         jax
+        jaxlib
         jedi
         jinja2
         joblib
@@ -235,6 +236,7 @@ in
         #skorch
         statsmodels
         tensorflow
+        tensorboard
         tensorboardx
         torchvision
         torchmetrics
@@ -257,6 +259,7 @@ in
         wtforms
         xarray
         xgboost
+        #xnatpy
         zipp
     ]))
 ]
