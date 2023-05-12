@@ -12,6 +12,33 @@ old-pkgs: final: prev: {
 
       propagatedBuildInputs = with pprev; [ pillow ];
     };
+
+    highdicom = let
+      test_data = prev.fetchFromGitHub {
+        owner = "pydicom";
+        repo = "pydicom-data";
+        rev = "bbb723879690bb77e077a6d57657930998e92bd5";
+        hash = "sha256-dCI1temvpNWiWJYVfQZKy/YJ4ad5B0e9hEKHJnEeqzk=";
+      }; in
+    pfinal.buildPythonPackage rec {
+      pname = "highdicom";
+      version = "0.21.1";
+      src = final.fetchFromGitHub {
+        owner = "ImagingDataCommons";
+        repo = "highdicom";
+        rev = "refs/tags/v${version}";
+        hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
+      };
+
+      preCheck = ''
+        export HOME=$TMP/test-home
+        mkdir -p $HOME/.pydicom/
+        ln -s ${test_data}/data_store/data $HOME/.pydicom/data
+      '';
+
+      propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
+      nativeCheckInputs = with pprev; [ pytestCheckHook ];
+    };
     qudida = pfinal.buildPythonPackage rec {
       pname = "qudida";
       version = "0.0.4";
