@@ -1,5 +1,14 @@
 old-pkgs: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+    monai = pprev.monai.overrideAttrs (oa: rec {
+      version = "1.2.0rc6";
+      src = final.fetchFromGitHub {
+        owner = "Project-MONAI";
+        repo = "MONAI";
+        rev = "refs/tags/${version}";
+        hash = "sha256-qCqy02h1Ct3UIjnG8Yp9Oq1TcS2RZFOn1EjOoVI0GrI";
+      };
+    });
     pillow-jpls = pfinal.buildPythonPackage rec {
       pname = "pillow-jpls";
       version = "1.2.0";
