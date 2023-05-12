@@ -1,5 +1,53 @@
 old-pkgs: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+    monai = pprev.monai.overrideAttrs (oa: rec {
+      version = "1.2.0rc6";
+      src = final.fetchFromGitHub {
+        owner = "Project-MONAI";
+        repo = "MONAI";
+        rev = "refs/tags/${version}";
+        hash = "sha256-qCqy02h1Ct3UIjnG8Yp9Oq1TcS2RZFOn1EjOoVI0GrI";
+      };
+    });
+    pillow-jpls = pfinal.buildPythonPackage rec {
+      pname = "pillow-jpls";
+      version = "1.2.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/c8/8f/e031b735a680f290aa00fec0720834f7b4de66ec339096be1913759b9b4a/pillow_jpls-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-0JeRmAGv6wojbyIDbLuuD99pj/l+k1BAhEEjp6P/Syk";
+      };
+
+      propagatedBuildInputs = with pprev; [ pillow ];
+    };
+
+    highdicom = let
+      test_data = prev.fetchFromGitHub {
+        owner = "pydicom";
+        repo = "pydicom-data";
+        rev = "bbb723879690bb77e077a6d57657930998e92bd5";
+        hash = "sha256-dCI1temvpNWiWJYVfQZKy/YJ4ad5B0e9hEKHJnEeqzk=";
+      }; in
+    pfinal.buildPythonPackage rec {
+      pname = "highdicom";
+      version = "0.21.1";
+      src = final.fetchFromGitHub {
+        owner = "ImagingDataCommons";
+        repo = "highdicom";
+        rev = "refs/tags/v${version}";
+        hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
+      };
+
+      preCheck = ''
+        export HOME=$TMP/test-home
+        mkdir -p $HOME/.pydicom/
+        ln -s ${test_data}/data_store/data $HOME/.pydicom/data
+      '';
+
+      propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
+      nativeCheckInputs = with pprev; [ pytestCheckHook ];
+    };
     qudida = pfinal.buildPythonPackage rec {
       pname = "qudida";
       version = "0.0.4";
