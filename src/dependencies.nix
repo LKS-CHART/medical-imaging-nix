@@ -29,6 +29,7 @@ in
   which
   curl wget
   zip unzip
+  pigz  # for dcm2niix
   pandoc quarto
   dcm2niix dcmtk gdcm ants
   cudaPackages.cudatoolkit
@@ -97,9 +98,11 @@ in
         einops
         grad-cam
         #fastai
+        fire  # for monai.bundle
         greenlet
         h5py
         heudiconv
+        highdicom
         httplib2
         hupper
         idna
@@ -142,6 +145,7 @@ in
         mistune
         mlflow
         monai
+        monai-deploy  # n.b.: breaks monai without highdicom
         msgpack
         munch
         mysql-connector
@@ -184,6 +188,7 @@ in
         pycparser
         pycrypto
         pydicom
+        pydicom-seg
         dicomweb-client
         pynetdicom
         pygments
@@ -259,7 +264,7 @@ in
         wtforms
         xarray
         xgboost
-        #xnatpy
+        xnatpy
         zipp
     ]))
 ]
