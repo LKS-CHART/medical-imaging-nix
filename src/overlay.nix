@@ -1,5 +1,17 @@
 old-pkgs: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+    pillow-jpls = pfinal.buildPythonPackage rec {
+      pname = "pillow-jpls";
+      version = "1.2.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/c8/8f/e031b735a680f290aa00fec0720834f7b4de66ec339096be1913759b9b4a/pillow_jpls-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-0JeRmAGv6wojbyIDbLuuD99pj/l+k1BAhEEjp6P/Syk";
+      };
+
+      propagatedBuildInputs = with pprev; [ pillow ];
+    };
     qudida = pfinal.buildPythonPackage rec {
       pname = "qudida";
       version = "0.0.4";
