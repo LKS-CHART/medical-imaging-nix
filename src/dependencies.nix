@@ -240,7 +240,6 @@ in
         #siuba
         #skorch
         statsmodels
-        tensorflow
         tensorboard
         tensorboardx
         torchvision
