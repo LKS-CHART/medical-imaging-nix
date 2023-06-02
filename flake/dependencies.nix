@@ -117,6 +117,7 @@ in
         ipywidgets
         superintendent
         nibabel
+        nilearn
         nipype
         antspyx
         iso8601
