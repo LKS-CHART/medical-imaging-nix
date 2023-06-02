@@ -22,6 +22,15 @@
         substituteInPlace pyproject.toml --replace "^3.2.0" ">3.2.0"
       '';
     });
+    bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
+      version = "0.37.0";
+      src = final.fetchFromGitHub {
+        owner = "TimDettmers";
+        repo = "bitsandbytes";
+        rev = "refs/tags/${version}";
+        hash = "sha256-f47oUHWxGxXXAwXUsPrnVKW5Vj/ncWnHWfEk1kQ1K+c=";
+      };
+    });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
       version = "1.2.0";
