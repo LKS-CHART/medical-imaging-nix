@@ -9,6 +9,19 @@
         hash = "sha256-qCqy02h1Ct3UIjnG8Yp9Oq1TcS2RZFOn1EjOoVI0GrI";
       };
     });
+    pydicom-seg = pprev.pydicom-seg.overrideAttrs (oa: rec {
+      version = "unstable-2023-05-16";
+      src = final.fetchFromGitHub {
+        owner = "razorx89";
+        repo = oa.pname;
+        rev = "1377e3e90ff34eb5087963e0b13e0ab15a3e4461";
+        hash = "sha256-YW6vwOgDT3LkjIHlKLqlHerpQxcJ/tczQkztNhDM1Dk=";
+        fetchSubmodules = true;
+      };
+      postPatch = oa.postPatch + ''
+        substituteInPlace pyproject.toml --replace "^3.2.0" ">3.2.0"
+      '';
+    });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
       version = "1.2.0";
