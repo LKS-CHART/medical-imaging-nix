@@ -1,4 +1,4 @@
-old-pkgs: final: prev: {
+{ orthanc_xnat_tools_src }: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
     monai = pprev.monai.overrideAttrs (oa: rec {
       version = "1.2.0rc6";
@@ -9,6 +9,18 @@ old-pkgs: final: prev: {
         hash = "sha256-qCqy02h1Ct3UIjnG8Yp9Oq1TcS2RZFOn1EjOoVI0GrI";
       };
     });
+    orthanc-xnat-tools = pfinal.buildPythonPackage rec {
+      pname = "orthanc-xnat-tools";
+      version = "1.2.0";
+
+      src = orthanc_xnat_tools_src;
+      propagatedBuildInputs = with pprev; [ numpy pandas pydicom pyxnat tqdm ];
+
+      #nativeCheckInputs = [ pprev.pytestCheckHook ];
+      doCheck = false;
+      pythonImportsCheck = [ "orthanc_xnat_tools" ];
+    };
+
     pillow-jpls = pfinal.buildPythonPackage rec {
       pname = "pillow-jpls";
       version = "1.2.0";

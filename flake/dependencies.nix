@@ -162,6 +162,7 @@ in
         oauthlib
         openpyxl
         #orthanc-rest-client
+        orthanc-xnat-tools
         packaging
         pandas
         pandocfilters
