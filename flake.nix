@@ -7,6 +7,11 @@
     #nixGL.url = "github:guibou/nixGL";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
+
+    orthanc_xnat_tools_src = {
+      url = "git+ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools";
+      flake = false;
+    };
  
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -14,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixGL, ... }:
+  outputs = { self, nixpkgs, nixGL, orthanc_xnat_tools_src, ... }:
     let
 
       # Generate a user-friendly version number.
@@ -24,12 +29,16 @@
       supportedSystems = [ "x86_64-linux" ];
 
       # Nvidia drivers to support
-      supportedNvidiaDrivers = [ "470.103.01" "470.161.03" ];
+      supportedNvidiaDrivers = [
+        "470.103.01"
+        "470.161.03"
+        "530.41.03"
+      ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      pkgsOverlay = forAllSystems (system: import ./flake/overlay.nix { }); #(import nixpkgs-old {inherit system;}));
+      pkgsOverlay = forAllSystems (system: import ./flake/overlay.nix { inherit orthanc_xnat_tools_src; });
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (
@@ -37,7 +46,10 @@
           inherit system; 
           config.allowUnfree = true;
           config.cudaSupport = true;
-          config.cudaCapabilities = [ "7.5" ];
+          config.cudaCapabilities = [
+            "7.5"
+            "8.0"
+          ];
           overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
         });
 

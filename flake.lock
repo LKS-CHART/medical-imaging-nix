@@ -68,11 +68,28 @@
         "type": "github"
       }
     },
+    "orthanc_xnat_tools_src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685124919,
+        "narHash": "sha256-xbBFnTYT1WhTbIdglyUPv8yKmTU2OO0lx3TSpzci7po=",
+        "ref": "refs/heads/main",
+        "rev": "50339ec8501c0324d4e3e7598c5591e2ecddfbf1",
+        "revCount": 19,
+        "type": "git",
+        "url": "ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools"
+      }
+    },
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
         "nixGL": "nixGL",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "orthanc_xnat_tools_src": "orthanc_xnat_tools_src"
       }
     }
   },

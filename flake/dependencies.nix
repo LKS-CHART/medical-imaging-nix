@@ -117,6 +117,7 @@ in
         ipywidgets
         superintendent
         nibabel
+        nilearn
         nipype
         antspyx
         iso8601
@@ -162,6 +163,7 @@ in
         oauthlib
         openpyxl
         #orthanc-rest-client
+        orthanc-xnat-tools
         packaging
         pandas
         pandocfilters
