@@ -29,7 +29,11 @@
       supportedSystems = [ "x86_64-linux" ];
 
       # Nvidia drivers to support
-      supportedNvidiaDrivers = [ "470.103.01" "470.161.03" ];
+      supportedNvidiaDrivers = [
+        "470.103.01"
+        "470.161.03"
+        "530.41.03"
+      ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -42,7 +46,10 @@
           inherit system; 
           config.allowUnfree = true;
           config.cudaSupport = true;
-          config.cudaCapabilities = [ "7.5" ];
+          config.cudaCapabilities = [
+            "7.5"
+            "8.0"
+          ];
           overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
         });
 
