@@ -63,7 +63,7 @@ in
         wrapr
       ];
     })
-    (python310.withPackages (ps: with ps; [
+    (python311.withPackages (ps: with ps; [
         accelerate
         addict
         albumentations
@@ -81,7 +81,7 @@ in
         bleach
         bitsandbytes
         bokeh
-        catboost
+        #catboost
         certifi
         cffi
         chardet
@@ -92,7 +92,7 @@ in
         dask
         datasets
         dicom2nifti
-        debugpy
+        #debugpy
         decorator
         defusedxml
         deid
@@ -141,7 +141,7 @@ in
         keyrings-cryptfile
         kiwisolver
         lightgbm
-        llvmlite
+        #llvmlite
         markupsafe
         matplotlib
         mistune
