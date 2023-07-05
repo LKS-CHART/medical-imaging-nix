@@ -32,6 +32,7 @@ in
   pigz  # for dcm2niix
   pandoc quarto
   dcm2niix dcmtk gdcm ants
+  parallel
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
   autoGlWrapper
@@ -135,7 +136,6 @@ in
         jupyterlab-widgets
         kafka-python
         kaggle
-        keras
         keyring
         keyrings-cryptfile
         kiwisolver
@@ -201,6 +201,7 @@ in
         pyramid
         #pyramid_mailer
         pyrsistent
+        pytest
         python-dateutil
         python-slugify
         python3-openid
@@ -246,7 +247,7 @@ in
         tensorboardx
         torchvision
         torchmetrics
-        #timm
+        timm
         torchio
         tornado
         tqdm
