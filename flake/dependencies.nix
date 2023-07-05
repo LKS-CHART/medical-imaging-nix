@@ -32,6 +32,7 @@ in
   pigz  # for dcm2niix
   pandoc quarto
   dcm2niix dcmtk gdcm ants
+  parallel
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
   autoGlWrapper
