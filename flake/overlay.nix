@@ -1,14 +1,5 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
-    monai = pprev.monai.overrideAttrs (oa: rec {
-      version = "1.2.0rc6";
-      src = final.fetchFromGitHub {
-        owner = "Project-MONAI";
-        repo = "MONAI";
-        rev = "refs/tags/${version}";
-        hash = "sha256-qCqy02h1Ct3UIjnG8Yp9Oq1TcS2RZFOn1EjOoVI0GrI";
-      };
-    });
     pydicom-seg = pprev.pydicom-seg.overrideAttrs (oa: rec {
       version = "unstable-2023-05-16";
       src = final.fetchFromGitHub {
