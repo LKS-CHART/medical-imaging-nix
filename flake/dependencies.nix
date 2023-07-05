@@ -135,7 +135,6 @@ in
         jupyterlab-widgets
         kafka-python
         kaggle
-        keras
         keyring
         keyrings-cryptfile
         kiwisolver
