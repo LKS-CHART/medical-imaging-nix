@@ -247,7 +247,7 @@ in
         tensorboardx
         torchvision
         torchmetrics
-        #timm
+        timm
         torchio
         tornado
         tqdm
