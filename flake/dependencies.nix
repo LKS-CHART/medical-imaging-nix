@@ -201,6 +201,7 @@ in
         pyramid
         #pyramid_mailer
         pyrsistent
+        pytest
         python-dateutil
         python-slugify
         python3-openid
