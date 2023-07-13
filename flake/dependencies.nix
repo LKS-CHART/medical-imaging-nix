@@ -194,6 +194,8 @@ in
         dicomweb-client
         pynetdicom
         pygments
+        pynvml
+        py-spy
         pyodbc
         pyorthanc
         pyparsing
