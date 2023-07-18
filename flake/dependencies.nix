@@ -194,6 +194,8 @@ in
         dicomweb-client
         pynetdicom
         pygments
+        pynvml
+        py-spy
         pyodbc
         pyorthanc
         pyparsing
@@ -203,6 +205,7 @@ in
         pyrsistent
         pytest
         python-dateutil
+        pytest-dotenv
         python-slugify
         python3-openid
         pytz
