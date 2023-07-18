@@ -203,6 +203,7 @@ in
         pyrsistent
         pytest
         python-dateutil
+        pytest-dotenv
         python-slugify
         python3-openid
         pytz
