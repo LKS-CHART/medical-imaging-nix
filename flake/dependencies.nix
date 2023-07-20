@@ -64,6 +64,7 @@ in
     (python310.withPackages (ps: with ps; [
         accelerate
         addict
+        albumentations
         #apex
         #apiron
         argon2_cffi
