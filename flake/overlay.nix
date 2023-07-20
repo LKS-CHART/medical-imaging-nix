@@ -73,29 +73,6 @@
       propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
       nativeCheckInputs = with pprev; [ pytestCheckHook ];
     };
-    qudida = pfinal.buildPythonPackage rec {
-      pname = "qudida";
-      version = "0.0.4";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        hash = "sha256-2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
-      };
-
-      propagatedBuildInputs = with pfinal; [
-        numpy scikit-learn typing-extensions opencv4
-      ];
-      nativeCheckInputs = [ pfinal.pytestCheckHook ];
-      doCheck = false;  # no tests in PyPI dist
-
-      postPatch = ''
-        echo "numpy>=0.18.0" > requirements.txt
-        echo "scikit-learn>=0.19.1" >> requirements.txt
-        echo "typing-extensions" >> requirements.txt
-        substituteInPlace setup.py --replace \
-          "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
-          "install_requires=INSTALL_REQUIRES"
-      '';
-    };
     ipycanvas = pfinal.buildPythonPackage rec {
       pname = "ipycanvas";
       version = "0.11.0";
