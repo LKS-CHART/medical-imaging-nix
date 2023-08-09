@@ -238,6 +238,7 @@ in
         plotnine
         polars
         #pymc
+        pyradiomics
         torch
         pytorch-lightning
         rising
