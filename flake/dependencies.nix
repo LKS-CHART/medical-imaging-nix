@@ -217,7 +217,6 @@ in
         pyzmq
         qtconsole
         qtpy
-        qudida
         requests
         requests-cache
         requests_oauthlib
