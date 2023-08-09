@@ -73,19 +73,6 @@
       propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
       nativeCheckInputs = with pprev; [ pytestCheckHook ];
     };
-    ipycanvas = pfinal.buildPythonPackage rec {
-      pname = "ipycanvas";
-      version = "0.11.0";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "KXabR+J1utzjHe+3dIVF3S6nYKesunWJLgv6HFvFsXU=";
-      };
-      propagatedBuildInputs = with pfinal; [ 
-        ipywidgets pillow numpy jupyter-packaging
-      ];
-      pythonImportsCheck = "ipycanvas";
-      doCheck = false;
-    };
     ipyevents = pfinal.buildPythonPackage rec {
       pname = "ipyevents";
       version = "2.0.1";
