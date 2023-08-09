@@ -1,18 +1,5 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
-    pydicom-seg = pprev.pydicom-seg.overrideAttrs (oa: rec {
-      version = "unstable-2023-05-16";
-      src = final.fetchFromGitHub {
-        owner = "razorx89";
-        repo = oa.pname;
-        rev = "1377e3e90ff34eb5087963e0b13e0ab15a3e4461";
-        hash = "sha256-YW6vwOgDT3LkjIHlKLqlHerpQxcJ/tczQkztNhDM1Dk=";
-        fetchSubmodules = true;
-      };
-      postPatch = oa.postPatch + ''
-        substituteInPlace pyproject.toml --replace "^3.2.0" ">3.2.0"
-      '';
-    });
     bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
       version = "0.37.0";
       src = final.fetchFromGitHub {
