@@ -64,6 +64,14 @@
         hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
       };
 
+      patches = [
+        (final.fetchpatch {
+          name = "pillow-10-api-updates";
+          url = "https://github.com/ImagingDataCommons/highdicom/commit/f453e7831e243e1f4d8493bfa79238a264c6e6b1.patch";
+          hash = "sha256-JUJv8oKpUWjHH15i6lpwYZj3giQzoT2Dq3XdHwbJ0Kc=";
+        })
+      ];
+
       preCheck = ''
         export HOME=$TMP/test-home
         mkdir -p $HOME/.pydicom/
