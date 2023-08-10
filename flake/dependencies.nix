@@ -159,7 +159,6 @@ in
         nest-asyncio
         networkx
         notebook
-        numba
         numpy
         oauthlib
         openpyxl
