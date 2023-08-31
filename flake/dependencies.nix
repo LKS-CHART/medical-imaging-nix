@@ -206,6 +206,7 @@ in
         pytest
         python-dateutil
         pytest-dotenv
+        python-hl7
         python-slugify
         python3-openid
         pytz
@@ -250,7 +251,8 @@ in
         tensorboardx
         torchvision
         torchmetrics
-        timm
+        #timm
+        tomlkit
         torchio
         tornado
         tqdm

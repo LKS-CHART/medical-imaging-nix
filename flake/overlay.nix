@@ -223,6 +223,17 @@
          substituteInPlace setup.py --replace "psycopg2-binary" "psycopg2"
       '';
     };
+    python-hl7 = pfinal.buildPythonPackage rec {
+      pname = "python-hl7";
+      version = "0.4.6-dev";
+      src = final.fetchFromGitHub {
+        owner = "johnpaulett";
+        repo = "python-hl7";
+        rev = "6d85f25d678e366d2617690d4ee1216bb8027db1";
+        sha256 = "mnTAOWE7lA/Dqsr6/l7JcJVElOlvaIQZyJ6e2xuN91U=";
+      };
+      pythonImportsCheck = [ "hl7" ];
+    };
     charticles = with final; rPackages.buildRPackage {
       name = "charticles";
       src = fetchgit {
