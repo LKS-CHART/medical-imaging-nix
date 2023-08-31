@@ -4,6 +4,10 @@
   # Nixpkgs / NixOS version to use.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/master";
+
+    dsaa-pkgs.url = "github:LKS-CHART/nix-packages/main";
+    dsaa-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+
     #nixGL.url = "github:guibou/nixGL";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +23,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixGL, orthanc_xnat_tools_src, ... }:
+  outputs = { self, nixpkgs, dsaa-pkgs, nixGL, orthanc_xnat_tools_src, ... }:
     let
 
       # Generate a user-friendly version number.
