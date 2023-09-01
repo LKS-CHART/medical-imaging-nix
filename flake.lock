@@ -68,6 +68,22 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1682383072,
+        "narHash": "sha256-saQzneBe0yfkqJAYbE2IJzOsIWAt1WVnBz3kmqNiiB0=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "02f3cbbe58e290ef9759294c8d6a0ac5779a512a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "02f3cbbe58e290ef9759294c8d6a0ac5779a512a",
+        "type": "github"
+      }
+    },
     "orthanc_xnat_tools_src": {
       "flake": false,
       "locked": {
@@ -89,6 +105,7 @@
         "flake-compat": "flake-compat",
         "nixGL": "nixGL",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "orthanc_xnat_tools_src": "orthanc_xnat_tools_src"
       }
     }

@@ -64,6 +64,7 @@ in
     (python310.withPackages (ps: with ps; [
         accelerate
         addict
+        albumentations
         #apex
         #apiron
         argon2_cffi
@@ -217,7 +218,6 @@ in
         pyzmq
         qtconsole
         qtpy
-        qudida
         requests
         requests-cache
         requests_oauthlib

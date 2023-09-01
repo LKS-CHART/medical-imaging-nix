@@ -1,5 +1,14 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+    qudida = prev.nur.repos.some-pkgs.qudida.overrideAttrs (oa: {postPatch =
+      oa.postPatch + ''
+      sed -i 's/from sklearn\.decomposition import PCA/import cv2/' qudida/__init__.py
+      sed -E -i '1,/import cv2/s/import cv2/from sklearn.decomposition import PCA/' qudida/__init__.py
+    '';});
+    albumentations = (prev.nur.repos.some-pkgs.albumentations.override {qudida = pfinal.qudida;}).overrideAttrs (oa: {postPatch =
+      oa.postPatch + ''
+      sed -E -i 's/(from \.augmentations import \*)/import sklearn.decomposition\n\1/' albumentations/__init__.py
+     '';});
     pydicom-seg = pprev.pydicom-seg.overrideAttrs (oa: rec {
       version = "unstable-2023-05-16";
       src = final.fetchFromGitHub {
@@ -72,29 +81,6 @@
 
       propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
       nativeCheckInputs = with pprev; [ pytestCheckHook ];
-    };
-    qudida = pfinal.buildPythonPackage rec {
-      pname = "qudida";
-      version = "0.0.4";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        hash = "sha256-2xmOKIerDJqgAj5WWvv/Qd+3azYfhf1eE/eA11uhjMg=";
-      };
-
-      propagatedBuildInputs = with pfinal; [
-        numpy scikit-learn typing-extensions opencv4
-      ];
-      nativeCheckInputs = [ pfinal.pytestCheckHook ];
-      doCheck = false;  # no tests in PyPI dist
-
-      postPatch = ''
-        echo "numpy>=0.18.0" > requirements.txt
-        echo "scikit-learn>=0.19.1" >> requirements.txt
-        echo "typing-extensions" >> requirements.txt
-        substituteInPlace setup.py --replace \
-          "install_requires=get_install_requirements(INSTALL_REQUIRES, CHOOSE_INSTALL_REQUIRES)" \
-          "install_requires=INSTALL_REQUIRES"
-      '';
     };
     ipycanvas = pfinal.buildPythonPackage rec {
       pname = "ipycanvas";

@@ -7,6 +7,7 @@
     #nixGL.url = "github:guibou/nixGL";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR?rev=02f3cbbe58e290ef9759294c8d6a0ac5779a512a";
 
     orthanc_xnat_tools_src = {
       url = "git+ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools";
@@ -19,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixGL, orthanc_xnat_tools_src, ... }:
+  outputs = { self, nixpkgs, nixGL, nur, orthanc_xnat_tools_src, ... }:
     let
 
       # Generate a user-friendly version number.
@@ -52,7 +53,7 @@
             "7.5"
             "8.0"
           ];
-          overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
+          overlays = [ nixGL.overlay nur.overlay pkgsOverlay.${system} ]; 
         });
 
       # Import the relevant dependencies
