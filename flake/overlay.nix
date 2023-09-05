@@ -56,6 +56,24 @@
       propagatedBuildInputs = with pprev; [ pillow ];
     };
 
+    pretrainedmodels = pfinal.buildPythonPackage rec {
+      pname = "pretrainedmodels";
+      version = "0.7.4";
+      src = final.fetchFromGitHub {
+        owner = "Cadene";
+        repo  = "pretrained-models.pytorch";
+        rev   = "8aae3d8";
+        hash   = "sha256-OK865VBFRbsSZbEGHe1wLdkioj595YmLwaztwx2R6tE=";
+      };
+
+      preCheck = ''
+         export HOME=$(mktemp -d)
+      '';
+      doCheck = false;
+
+      propagatedBuildInputs = with pprev; [ torch torchvision munch tqdm scipy ];
+    };
+
     highdicom = let
       test_data = prev.fetchFromGitHub {
         owner = "pydicom";

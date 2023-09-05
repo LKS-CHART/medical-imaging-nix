@@ -181,7 +181,7 @@ in
         pip
         plaster
         plaster-pastedeploy
-        #pretrainedmodels
+        pretrainedmodels
         prometheus-client
         prompt-toolkit
         protobuf
