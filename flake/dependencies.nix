@@ -17,6 +17,7 @@ in
   glibcLocales
   fontconfig
   gnugrep
+  gnumake
   gnutar
   gnused
   gawk
@@ -33,6 +34,7 @@ in
   pandoc quarto
   dcm2niix dcmtk gdcm ants
   parallel
+  ruff
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
   autoGlWrapper
