@@ -9,12 +9,37 @@
         hash = "sha256-f47oUHWxGxXXAwXUsPrnVKW5Vj/ncWnHWfEk1kQ1K+c=";
       };
     });
+    # highdicom tests don't pass with 2.4.x:
+    pydicom = pprev.pydicom.overridePythonAttrs (oa: rec {
+      version = "2.3.1";
+      src = final.fetchFromGitHub {
+        owner = "pydicom";
+        repo = "pydicom";
+        rev = "refs/tags/v2.3.1";
+        hash = "sha256-xt0aK908lLgNlpcI86OSxy96Z/PZnQh7+GXzJ0VMQGA=";
+      };
+      disabledTests = pprev.pydicom.disabledTests ++ [
+        "TestNumpy_NumpyHandler"
+        "test_can_access_unsupported_dataset"
+      ];
+    });
+    # see https://github.com/NixOS/nixpkgs/issues/252616
+    albumentations = pprev.albumentations.overridePythonAttrs (oa: {
+      pythonImportsCheck = [ ];
+    });
+    qudida = pprev.qudida.overridePythonAttrs (oa: {
+      pythonImportsCheck = [ ];
+    });
+    # random failing diffusion test with downgraded pydicom; don't really care
+    nibabel = pprev.nibabel.overridePythonAttrs (oa: {
+      disabledTests = oa.disabledTests ++ [ "test_diffusion_parameters_strict_sort" ];
+    });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
       version = "1.2.0";
 
       src = orthanc_xnat_tools_src;
-      propagatedBuildInputs = with pprev; [ numpy pandas pydicom pyxnat tqdm ];
+      propagatedBuildInputs = with pprev; [ numpy pandas pfinal.pydicom pyxnat tqdm ];
 
       #nativeCheckInputs = [ pprev.pytestCheckHook ];
       doCheck = false;
@@ -38,8 +63,8 @@
       test_data = prev.fetchFromGitHub {
         owner = "pydicom";
         repo = "pydicom-data";
-        rev = "bbb723879690bb77e077a6d57657930998e92bd5";
-        hash = "sha256-dCI1temvpNWiWJYVfQZKy/YJ4ad5B0e9hEKHJnEeqzk=";
+        rev = "cbb9b2148bccf0f550e3758c07aca3d0e328e768";
+        hash = "sha256-nF/j7pfcEpWHjjsqqTtIkW8hCEbuQ3J4IxpRk0qc1CQ=";
       }; in
     pfinal.buildPythonPackage rec {
       pname = "highdicom";
