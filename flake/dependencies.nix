@@ -236,6 +236,7 @@ in
         plotnine
         polars
         #pymc
+        pydantic
         pyradiomics
         torch
         pytorch-lightning
