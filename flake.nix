@@ -36,6 +36,7 @@
         "530.41.03"
         "535.54.03"
         "535.86.05"
+        "535.104.05"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
