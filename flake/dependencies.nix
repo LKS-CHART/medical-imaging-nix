@@ -17,6 +17,7 @@ in
   glibcLocales
   fontconfig
   gnugrep
+  gnumake
   gnutar
   gnused
   gawk
@@ -33,6 +34,7 @@ in
   pandoc quarto
   dcm2niix dcmtk gdcm ants
   parallel
+  ruff
   cudaPackages.cudatoolkit
   snakemake ] ++ glWrappers ++ [
   autoGlWrapper
@@ -64,6 +66,7 @@ in
     (python310.withPackages (ps: with ps; [
         accelerate
         addict
+        albumentations
         #apex
         #apiron
         argon2_cffi
@@ -122,8 +125,6 @@ in
         nipype
         antspyx
         iso8601
-        jax
-        jaxlib
         jedi
         jinja2
         joblib
@@ -158,7 +159,6 @@ in
         nest-asyncio
         networkx
         notebook
-        numba
         numpy
         oauthlib
         openpyxl
@@ -216,7 +216,6 @@ in
         pyzmq
         qtconsole
         qtpy
-        qudida
         requests
         requests-cache
         requests_oauthlib
@@ -237,6 +236,8 @@ in
         plotnine
         polars
         #pymc
+        pydantic
+        pyradiomics
         torch
         pytorch-lightning
         rising

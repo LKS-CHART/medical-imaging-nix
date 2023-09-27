@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680715140,
-        "narHash": "sha256-RcD5NXj7gFE6cTyRo6JtUDEGTareIhzOqerxkDd3GmM=",
+        "lastModified": 1695824351,
+        "narHash": "sha256-75Hxp5j8OAfj0pQwyvTZXvrjQ16yKw8zIe7TQizhG7k=",
         "owner": "cfhammill",
         "repo": "nixGL",
-        "rev": "eea3c7b4cb29c7b9b4d9af8f05e2b53a97bbc120",
+        "rev": "0badf9a828685a1051dc5366e59f7cdd20496d14",
         "type": "github"
       },
       "original": {
@@ -54,17 +54,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1683822374,
-        "narHash": "sha256-UEvh4KI82s1S2Gpb1sRQQ8sFP0mcypxN4nPkzhbdiLs=",
+        "lastModified": 1694669921,
+        "narHash": "sha256-6ESpJ6FsftHV96JO/zn6je07tyV2dlLR7SdLsmkegTY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6948ef4deff7a72ebe5242244bd3730e8542b925",
+        "rev": "f2ea252d23ebc9a5336bf6a61e0644921f64e67c",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "master",
         "repo": "nixpkgs",
+        "rev": "f2ea252d23ebc9a5336bf6a61e0644921f64e67c",
         "type": "github"
       }
     },
@@ -77,11 +77,11 @@
         "rev": "50339ec8501c0324d4e3e7598c5591e2ecddfbf1",
         "revCount": 19,
         "type": "git",
-        "url": "ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools"
       }
     },
     "root": {

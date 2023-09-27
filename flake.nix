@@ -9,7 +9,7 @@
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
     orthanc_xnat_tools_src = {
-      url = "git+ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools";
+      url = "git+ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools";
       flake = false;
     };
  
@@ -33,6 +33,7 @@
         "470.103.01"
         "470.161.03"
         "530.41.03"
+        "535.104.05"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
