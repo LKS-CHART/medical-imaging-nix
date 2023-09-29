@@ -228,7 +228,7 @@ in
         send2trash
         #slicer
         sqlalchemy
-        tables
+        #tables
         terminado
         terminaltables
         testpath
