@@ -204,8 +204,10 @@ in
         #pyramid_mailer
         pyrsistent
         pytest
-        python-dateutil
         pytest-dotenv
+        pytest-postgresql
+        python-dateutil
+        python-dotenv
         python-slugify
         python3-openid
         pytz

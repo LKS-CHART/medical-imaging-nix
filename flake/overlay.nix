@@ -123,16 +123,32 @@
     };
     superintendent = pfinal.buildPythonPackage rec {
       pname = "superintendent";
-      version = "0.5.3";
+      version = "0.6.0";
+      format = "pyproject";
+      #format = "flit";
+      postPatch = ''
+        substituteInPlace pyproject.toml  \
+          --replace "flit_core >=2,<3" "flit_core"  \
+          --replace "psycopg2-binary" "psycopg2"
+      '';
       src = pfinal.fetchPypi {
         inherit pname version;
-        sha256 = "kgWnXBgSOmwQmz7smiR0/Y1Aa9oZNa0fSiCm9Zu4OIw=";
+        hash = "sha256-Qb/lwqmqJHDSiC12dcosuR41EQHT2ge7+8AGfvar2JM=";
       };
-      format = "flit";
-      propagatedBuildInputs = with pfinal; [ ipywidgets numpy pandas scikit-learn scipy schedule sqlalchemy pillow cachetools psycopg2 flask ipyevents typing-extensions ];
-      postPatch = ''
-              substituteInPlace pyproject.toml --replace "psycopg2-binary" "psycopg2"
-              '';
+      nativeBuildInputs = with pfinal; [ flit-core ];
+      propagatedBuildInputs = with pfinal; [
+        ipywidgets
+        numpy
+        pandas
+        scikit-learn
+        scipy
+        sqlalchemy
+        pillow
+        cachetools
+        psycopg2
+        ipyevents
+        typing-extensions
+      ];
     };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
