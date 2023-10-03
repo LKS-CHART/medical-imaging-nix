@@ -35,6 +35,7 @@ in
   pigz  # for dcm2niix
   pandoc
   quarto
+  postgresql
   dcm2niix
   ants
   parallel
