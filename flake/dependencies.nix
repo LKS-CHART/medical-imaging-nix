@@ -174,7 +174,7 @@ in
         pexpect
         #pfmisc
         pgnotify
-        psycopg2
+        psycopg
         pickleshare
         pillow
         pip
