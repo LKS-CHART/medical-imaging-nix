@@ -112,6 +112,7 @@ in
         pyrsistent
         pytest
         pytest-dotenv
+        pytest-mock
         pytest-postgresql
         python-dateutil
         python-dotenv
