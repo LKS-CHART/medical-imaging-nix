@@ -164,6 +164,20 @@
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
     };
+    python-hl7 = pfinal.buildPythonPackage rec {
+      pname = "python-hl7";
+      version = "0.4.5";
+      format = "pyproject";
+      src = final.fetchFromGitHub {
+        owner = "johnpaulett";
+        repo = "python-hl7";
+        rev = "refs/tags/${version}";
+        hash = "sha256-9uFdyL4+9KSWXflyOMOeUudZTv4NwYPa0ADNTmuVbqo=";
+      };
+      nativeBuildInputs = with pfinal; [ setuptools wheel ];
+      nativeCheckInputs = with pfinal; [ pytestCheckHook ];
+      pythonImportsCheck = [ "hl7" ];
+    };
     mdai = pfinal.buildPythonPackage rec {
       pname = "mdai";
       version = "0.12.2";

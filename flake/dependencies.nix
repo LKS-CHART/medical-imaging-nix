@@ -115,6 +115,7 @@ in
         pytest-postgresql
         python-dateutil
         python-dotenv
+        python-hl7
         python-slugify
         pytz
         pyxnat
