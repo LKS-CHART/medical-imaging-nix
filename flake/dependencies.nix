@@ -137,6 +137,7 @@ in
         simpleitk
         statsmodels
         tensorboard
+        torchio
         torchvision
         torchmetrics
         timm
