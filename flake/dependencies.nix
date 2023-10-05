@@ -101,6 +101,7 @@ in
         pgnotify
         psycopg
         pillow
+        pip
         prometheus-client
         pycm
         pydicom
