@@ -100,6 +100,7 @@ in
         pandocfilters
         pgnotify
         psycopg
+        (lib.lists.head psycopg.passthru.optional-dependencies.pool)
         pillow
         pip
         prometheus-client
