@@ -1,5 +1,8 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
+    polars = pprev.polars.overridePythonAttrs (oa: {
+      buildInputs = [ ];  # workaround for https://github.com/NixOS/nixpkgs/issues/263799
+    });
     bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
       version = "0.37.0";
       src = final.fetchFromGitHub {
