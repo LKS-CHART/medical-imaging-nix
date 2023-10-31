@@ -1,5 +1,8 @@
 { orthanc_xnat_tools_src }: final: prev: {
-  python310 = prev.python310.override { packageOverrides = pfinal: pprev: {
+  python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
+    polars = pprev.polars.overridePythonAttrs (oa: {
+      buildInputs = [ ];  # workaround for https://github.com/NixOS/nixpkgs/issues/263799
+    });
     bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
       version = "0.37.0";
       src = final.fetchFromGitHub {
@@ -52,8 +55,8 @@
       format = "wheel";
 
       src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/c8/8f/e031b735a680f290aa00fec0720834f7b4de66ec339096be1913759b9b4a/pillow_jpls-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        hash = "sha256-0JeRmAGv6wojbyIDbLuuD99pj/l+k1BAhEEjp6P/Syk";
+        url = "https://files.pythonhosted.org/packages/72/f3/725fd022d58e95374c0c6e8e3d183126938ffec580583fa2bf24a453191d/pillow_jpls-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-zpOAh+TPpO4YtleDfHXTtISpa3ibTbq9E7B4k2slhEA=";
       };
 
       propagatedBuildInputs = with pprev; [ pillow ];
@@ -152,12 +155,11 @@
     };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
-      version = "0.3.5";
+      version = "0.3.8";
       src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/e8/1c/f324098ce15c330c1adff72b49220cb88815b208485bfb52795f2028100c/antspyx-0.3.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        sha256 = "y3LhIBPcQuEDr7GjgJIgSgMWIbX/2CW7ZQ1fwBYaF+k=";
+        url = "https://files.pythonhosted.org/packages/dd/2f/a81d5629ef8e545cffd86368756962682a7386a80601fe35387e4aaffa23/antspyx-0.3.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-q6xozoAph9JZ0naXX4vRbqsj6kldeH9WAe2R4CZDIS0=";
       };
-      # nativeBuildInputs = [ final.patchelf ];
       propagatedBuildInputs = with pfinal; [ matplotlib pyyaml scikitimage scikit-learn chart-studio nibabel statsmodels
                                              webcolors
                                            ];

@@ -40,11 +40,10 @@ in
   ants
   parallel
   ruff
-  #cudaPackages.cudatoolkit
-  snakemake ] ++ glWrappers ++ [
+  ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
-  (python310.withPackages (ps: with ps; [
+  (python311.withPackages (ps: with ps; [
         attrs
         avro
         backcall
