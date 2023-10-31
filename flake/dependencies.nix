@@ -24,7 +24,7 @@ in
   watch
   openssl
   bashInteractive
-  git gdown git-annex git-lfs datalad dvc
+  git gdown git-annex
   openssh
   less
   which
@@ -36,7 +36,7 @@ in
   parallel
   ruff
   cudaPackages.cudatoolkit
-  snakemake ] ++ glWrappers ++ [
+  ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (with rPackages;
@@ -63,7 +63,7 @@ in
         wrapr
       ];
     })
-    (python310.withPackages (ps: with ps; [
+    (python311.withPackages (ps: with ps; [
         accelerate
         addict
         albumentations
@@ -81,7 +81,7 @@ in
         bleach
         bitsandbytes
         bokeh
-        catboost
+        #catboost
         certifi
         cffi
         chardet
@@ -92,7 +92,7 @@ in
         dask
         datasets
         dicom2nifti
-        debugpy
+        #debugpy
         decorator
         defusedxml
         deid
@@ -105,7 +105,6 @@ in
         fire  # for monai.bundle
         greenlet
         h5py
-        heudiconv
         highdicom
         httplib2
         hupper
@@ -121,7 +120,6 @@ in
         ipywidgets
         superintendent
         nibabel
-        nilearn
         nipype
         antspyx
         iso8601
@@ -141,7 +139,7 @@ in
         keyrings-cryptfile
         kiwisolver
         lightgbm
-        llvmlite
+        #llvmlite
         markupsafe
         matplotlib
         mistune
@@ -172,7 +170,6 @@ in
         pbkdf2
         peft
         pexpect
-        #pfmisc
         pgnotify
         psycopg2
         pickleshare
@@ -180,7 +177,6 @@ in
         pip
         plaster
         plaster-pastedeploy
-        #pretrainedmodels
         prometheus-client
         prompt-toolkit
         protobuf
@@ -228,16 +224,12 @@ in
         scipy
         secretstorage
         send2trash
-        #slicer
         sqlalchemy
-        #tables
         terminado
         terminaltables
         testpath
         text-unidecode
-        plotnine
         polars
-        #pymc
         pydantic
         pyradiomics
         torch
@@ -245,9 +237,6 @@ in
         rising
         simpleitk
         seaborn
-        sentencepiece
-        #siuba
-        #skorch
         statsmodels
         tensorboard
         tensorboardx
@@ -255,7 +244,6 @@ in
         torchmetrics
         timm
         torchio
-        tornado
         tqdm
         traitlets
         transaction
@@ -270,8 +258,6 @@ in
         webencodings
         widgetsnbextension
         wtforms
-        xarray
-        xgboost
         xnatpy
         zipp
     ]))
