@@ -123,8 +123,6 @@ in
         nipype
         antspyx
         iso8601
-        jax
-        jaxlib
         jedi
         jinja2
         joblib
