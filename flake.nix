@@ -31,13 +31,7 @@
 
       # Nvidia drivers to support
       supportedNvidiaDrivers = [
-        "470.103.01"
-        "470.161.03"
-        "530.41.03"
-        "535.54.03"
-        "535.86.05"
-        "535.104.05"
-        "535.113.01"
+        "535.129.03"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.

@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695824351,
-        "narHash": "sha256-75Hxp5j8OAfj0pQwyvTZXvrjQ16yKw8zIe7TQizhG7k=",
+        "lastModified": 1699543103,
+        "narHash": "sha256-5gtYKBrgRVCGP9IkLqvTkceXHSHKOsM/QUF5/Fo8ScQ=",
         "owner": "cfhammill",
         "repo": "nixGL",
-        "rev": "0badf9a828685a1051dc5366e59f7cdd20496d14",
+        "rev": "07a05e85ce8cab92ab4037dfc708c19874746130",
         "type": "github"
       },
       "original": {
