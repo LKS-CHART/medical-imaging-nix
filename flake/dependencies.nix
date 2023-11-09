@@ -23,62 +23,26 @@ in
   watch
   openssl
   bashInteractive
-  git gdown git-annex git-lfs datalad dvc
+  git gdown git-annex
   openssh
   less
   which
   curl wget
   zip unzip
   pigz  # for dcm2niix
-  pandoc quarto
-  dcm2niix dcmtk gdcm ants
+  dcm2niix gdcm
   parallel
-  cudaPackages.cudatoolkit
-  snakemake ] ++ glWrappers ++ [
+  ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
-  (with rPackages;
-    # rWrapper bakes R_SITE_LIBS into the intepretter
-    rWrapper.override {
-      packages = [
-        R
-        batchtools
-        data_table
-        forecast
-        tidyverse
-        tidymodels
-        reticulate
-        #charticles
-        keyring
-        dbplyr
-        RMariaDB
-        pins
-        pROC
-        distr
-        lenses
-        openxlsx
-        vetiver
-        wrapr
-      ];
-    })
     (python310.withPackages (ps: with ps; [
-        accelerate
         addict
         albumentations
-        #apex
-        #apiron
-        argon2_cffi
-        argon2-cffi-bindings
-        #arviz
-        asn1crypto
-        async_generator
         attrs
         avro
         backcall
         batchgenerators
         bleach
-        bitsandbytes
-        bokeh
         catboost
         certifi
         cffi
@@ -86,24 +50,17 @@ in
         cloudpickle
         cryptography
         cycler
-        cython
-        dask
         datasets
-        dicom2nifti
-        debugpy
+        #debugpy  # pulls in gdb
         decorator
         defusedxml
         deid
         #efficientnet-pytorch
         entrypoints
-        evaluate
         einops
         grad-cam
-        #fastai
-        fire  # for monai.bundle
         greenlet
         h5py
-        heudiconv
         highdicom
         httplib2
         hupper
@@ -119,45 +76,32 @@ in
         ipywidgets
         superintendent
         nibabel
-        nilearn
-        nipype
-        antspyx
         iso8601
         jedi
         jinja2
         joblib
-        json5
         jsonschema
         jupyter
         jupyter-client
         jupyter_console
         jupyterlab-pygments
         jupyterlab-widgets
-        kafka-python
         kaggle
         keyring
         keyrings-cryptfile
         kiwisolver
         lightgbm
-        llvmlite
         markupsafe
         matplotlib
         mistune
-        mlflow
-        monai
-        monai-deploy  # n.b.: breaks monai without highdicom
         msgpack
         munch
-        mysql-connector
         mdai
         nbclient
         nbconvert
-        nbdev
         nbformat
-        nest-asyncio
         networkx
         notebook
-        numba
         numpy
         oauthlib
         openpyxl
@@ -165,11 +109,9 @@ in
         orthanc-xnat-tools
         packaging
         pandas
-        pandocfilters
         parso
         PasteDeploy
         pbkdf2
-        peft
         pexpect
         #pfmisc
         pgnotify
@@ -189,12 +131,10 @@ in
         pycparser
         pycrypto
         pydicom
-        pydicom-seg
         dicomweb-client
         pynetdicom
         pygments
         pynvml
-        py-spy
         pyodbc
         pyorthanc
         pyparsing
@@ -209,23 +149,16 @@ in
         python-slugify
         python3-openid
         pytz
-        pywavelets
         pyxdg
         pyxnat
         pyyaml
-        pyzmq
-        qtconsole
-        qtpy
         requests
-        requests-cache
         requests_oauthlib
-        rpy2
         safetensors
         scikitimage
         scikit-learn
         scipy
         secretstorage
-        send2trash
         #slicer
         sqlalchemy
         tables
@@ -233,17 +166,12 @@ in
         terminaltables
         testpath
         text-unidecode
-        plotnine
         polars
-        #pymc
         torch
         pytorch-lightning
         rising
-        simpleitk
         seaborn
         sentencepiece
-        #siuba
-        #skorch
         statsmodels
         tensorboard
         tensorboardx
@@ -251,7 +179,6 @@ in
         torchmetrics
         #timm
         tomlkit
-        torchio
         tornado
         tqdm
         traitlets
@@ -267,7 +194,6 @@ in
         webencodings
         widgetsnbextension
         wtforms
-        xarray
         xgboost
         xnatpy
         zipp
