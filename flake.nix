@@ -46,7 +46,6 @@
           config.allowUnfree = true;
           config.cudaSupport = true;
           config.cudaCapabilities = [
-            "7.5"
             "8.0"
           ];
           overlays = [ nixGL.overlay nur.overlay pkgsOverlay.${system} ]; 
