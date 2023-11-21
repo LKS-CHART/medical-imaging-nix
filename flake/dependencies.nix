@@ -74,6 +74,7 @@ in
         ipympl
         ipyannotations
         ipywidgets
+        sentry-sdk
         superintendent
         nibabel
         iso8601
