@@ -33,11 +33,7 @@ in
   curl wget
   zip unzip
   pigz  # for dcm2niix
-  pandoc
-  quarto
-  postgresql
   dcm2niix
-  ants
   parallel
   ruff
   ] ++ glWrappers ++ [
@@ -49,13 +45,9 @@ in
         backcall
         batchgenerators
         cffi
-        debugpy
         decorator
-        defusedxml
         deid
-        #efficientnet-pytorch
         entrypoints
-        evaluate
         einops
         grad-cam
         ignite
@@ -82,11 +74,9 @@ in
         matplotlib
         mistune
         monai
-        mysql-connector
         mdai
         nbclient
         nbconvert
-        nbdev
         nbformat
         networkx
         notebook
@@ -96,7 +86,6 @@ in
         orthanc-xnat-tools
         packaging
         pandas
-        pandocfilters
         pgnotify
         psycopg
         (lib.lists.head psycopg.passthru.optional-dependencies.pool)
@@ -107,7 +96,6 @@ in
         pydicom
         pynetdicom
         pynvml
-        py-spy
         pyodbc
         pyorthanc
         pyrsistent
@@ -122,7 +110,6 @@ in
         pytz
         pyxnat
         pyyaml
-        qtconsole
         requests
         safetensors
         scikitimage
@@ -132,7 +119,6 @@ in
         sqlalchemy
         polars
         pydantic
-        pyradiomics
         torch
         pytorch-lightning
         simpleitk
@@ -141,7 +127,6 @@ in
         torchio
         torchvision
         torchmetrics
-        timm
         tqdm
         traitlets
         transaction
@@ -150,7 +135,6 @@ in
         typing-extensions
         urllib3
         widgetsnbextension
-        wtforms
         xnatpy
         zipp
     ]))
