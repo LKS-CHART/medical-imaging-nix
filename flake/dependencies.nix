@@ -36,7 +36,7 @@ in
   dcm2niix
   parallel
   ruff
-  su
+  sudo
   ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
