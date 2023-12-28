@@ -1,41 +1,11 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
-    polars = pprev.polars.overridePythonAttrs (oa: {
-      buildInputs = [ ];  # workaround for https://github.com/NixOS/nixpkgs/issues/263799
-    });
-    bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
-      version = "0.37.0";
-      src = final.fetchFromGitHub {
-        owner = "TimDettmers";
-        repo = "bitsandbytes";
-        rev = "refs/tags/${version}";
-        hash = "sha256-f47oUHWxGxXXAwXUsPrnVKW5Vj/ncWnHWfEk1kQ1K+c=";
-      };
-    });
-    # highdicom tests don't pass with 2.4.x:
-    pydicom = pprev.pydicom.overridePythonAttrs (oa: rec {
-      version = "2.3.1";
-      src = final.fetchFromGitHub {
-        owner = "pydicom";
-        repo = "pydicom";
-        rev = "refs/tags/v2.3.1";
-        hash = "sha256-xt0aK908lLgNlpcI86OSxy96Z/PZnQh7+GXzJ0VMQGA=";
-      };
-      disabledTests = pprev.pydicom.disabledTests ++ [
-        "TestNumpy_NumpyHandler"
-        "test_can_access_unsupported_dataset"
-      ];
-    });
     # see https://github.com/NixOS/nixpkgs/issues/252616
     albumentations = pprev.albumentations.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
     });
     qudida = pprev.qudida.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
-    });
-    # random failing diffusion test with downgraded pydicom; don't really care
-    nibabel = pprev.nibabel.overridePythonAttrs (oa: {
-      disabledTests = oa.disabledTests ++ [ "test_diffusion_parameters_strict_sort" ];
     });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
@@ -71,21 +41,13 @@
       }; in
     pfinal.buildPythonPackage rec {
       pname = "highdicom";
-      version = "0.21.1";
+      version = "0.22.0";
       src = final.fetchFromGitHub {
         owner = "ImagingDataCommons";
         repo = "highdicom";
         rev = "refs/tags/v${version}";
-        hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
+        hash = "sha256-KHSJWEnm8u0xHkeeLF/U7MY4FfiWb6Q0GQQy2w1mnKw=";
       };
-
-      patches = [
-        (final.fetchpatch {
-          name = "pillow-10-api-updates";
-          url = "https://github.com/ImagingDataCommons/highdicom/commit/f453e7831e243e1f4d8493bfa79238a264c6e6b1.patch";
-          hash = "sha256-JUJv8oKpUWjHH15i6lpwYZj3giQzoT2Dq3XdHwbJ0Kc=";
-        })
-      ];
 
       preCheck = ''
         export HOME=$TMP/test-home
