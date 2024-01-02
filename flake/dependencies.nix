@@ -44,65 +44,39 @@ in
     rWrapper.override {
       packages = [
         R
-        batchtools
-        data_table
-        forecast
-        tidyverse
-        tidymodels
-        reticulate
-        #charticles
-        keyring
-        dbplyr
-        RMariaDB
-        pins
-        pROC
-        distr
-        lenses
-        openxlsx
-        vetiver
-        wrapr
+        #data_table
+        #forecast
+        #tidyverse
+        #tidymodels
+        #reticulate
+        #keyring
+        #dbplyr
+        #pins
+        #pROC
+        #distr
+        #lenses
+        #openxlsx
+        #wrapr
       ];
     })
     (python311.withPackages (ps: with ps; [
         accelerate
         addict
         albumentations
-        #apex
-        #apiron
-        argon2_cffi
-        argon2-cffi-bindings
-        #arviz
-        asn1crypto
-        async_generator
-        attrs
-        avro
-        backcall
         batchgenerators
-        bleach
-        bitsandbytes
-        bokeh
-        #catboost
-        certifi
         cffi
-        chardet
         cloudpickle
-        cryptography
-        cycler
-        cython
         dask
         datasets
         dicom2nifti
-        #debugpy
+        debugpy
         decorator
         defusedxml
         deid
-        #efficientnet-pytorch
         entrypoints
         evaluate
         einops
         grad-cam
-        #fastai
-        fire  # for monai.bundle
         greenlet
         h5py
         highdicom
@@ -111,7 +85,6 @@ in
         idna
         ignite
         imageio
-        importlib-metadata
         ipykernel
         ipython
         ipyniivue
@@ -133,12 +106,10 @@ in
         jupyter_console
         jupyterlab-pygments
         jupyterlab-widgets
-        kafka-python
         kaggle
         keyring
         keyrings-cryptfile
         kiwisolver
-        lightgbm
         #llvmlite
         markupsafe
         matplotlib
@@ -148,7 +119,6 @@ in
         monai-deploy  # n.b.: breaks monai without highdicom
         msgpack
         munch
-        mysql-connector
         mdai
         nbclient
         nbconvert
@@ -167,7 +137,6 @@ in
         pandocfilters
         parso
         PasteDeploy
-        pbkdf2
         peft
         pexpect
         pgnotify
@@ -175,23 +144,16 @@ in
         pickleshare
         pillow
         pip
-        plaster
-        plaster-pastedeploy
         prometheus-client
-        prompt-toolkit
         protobuf
-        ptyprocess
         pudb
         pycm
-        pycparser
-        pycrypto
         pydicom
         pydicom-seg
         dicomweb-client
         pynetdicom
         pygments
         pynvml
-        py-spy
         pyodbc
         pyorthanc
         pyparsing
@@ -213,17 +175,12 @@ in
         pyyaml
         pyzmq
         qtconsole
-        qtpy
         requests
-        requests-cache
-        requests_oauthlib
         rpy2
         safetensors
         scikitimage
         scikit-learn
         scipy
-        secretstorage
-        send2trash
         sqlalchemy
         terminado
         terminaltables
@@ -236,29 +193,20 @@ in
         pytorch-lightning
         rising
         simpleitk
-        seaborn
         statsmodels
         tensorboard
         tensorboardx
         torchvision
         torchmetrics
         timm
-        torchio
         tqdm
         traitlets
         transaction
         transformers
-        translationstring
         ttach
         typing-extensions
         urllib3
-        urwid
-        venusian
-        wcwidth
-        webencodings
         widgetsnbextension
-        wtforms
         xnatpy
-        zipp
     ]))
 ]
