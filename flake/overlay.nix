@@ -86,6 +86,96 @@
         ipywidgets ipycanvas palettable pillow ipyevents setupmeta numpy jupyter-packaging requests
       ];
     };
+    itk-core = pfinal.buildPythonPackage rec {
+      pname = "itk-core";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/fe/00/22580238b122f4c0d38061764ce94e0f47c9b8c9fc24e4f6ade6a93f4563/itk_core-5.3.0-cp311-cp311-manylinux_2_28_x86_64.whl";
+        hash = "sha256-fMJdCSPeuSGSmc2MWn5bwdjtZzFJegbPEhQJtxxyrlk=";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+    };
+    itk-filtering = pfinal.buildPythonPackage rec {
+      pname = "itk-filtering";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/aa/57/34fb28f369f2cd2dc623b008b58ed05329cc60df3892ab0df8ff67faa24c/itk_filtering-5.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-lOzZLC1uzz7iSMV52CTo8Z1zZR7PeVtg9/4SpuhygQg=";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+    };
+    itk-io = pfinal.buildPythonPackage rec {
+      pname = "itk-io";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/0d/87/55b0d962ceeb9991c6280bcb92a90078b7b2ed125abeb17d66143114596f/itk_io-5.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-ggORAuCKsKmoy4tpaBMLwvwm8QeF4fCJiA8Xaihfi0U=";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+    };
+    itk-numerics = pfinal.buildPythonPackage rec {
+      pname = "itk-numerics";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/19/9f/83005ecdab1afecdf43e914df514abbdec494f8ca4373b0fae896e8b272c/itk_numerics-5.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-ctqJ8cLQ0HalrM0EwH2gpeRaEJG5DaGxeMRNzteiZhs";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+      pythonImportsCheck = [ ];
+    };
+    itk-registration = pfinal.buildPythonPackage rec {
+      pname = "itk-registration";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/d5/37/3c91bc2a6953047869dc8f4dfe3753ef235c3f8504505fd76f0a615295f3/itk_registration-5.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-v65fLo0pv3yideondgHnxH/NyXPV4crnuNpKsrcrHG4=";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+    };
+    itk-segmentation = pfinal.buildPythonPackage rec {
+      pname = "itk-segmentation";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/34/4b/ef091e7e60e8476098729af850d21daefae666ff20148bc14cf7908d3017/itk_segmentation-5.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-uWTgxY2s/g1NGdkHQ8XDyLjed20mkThJZ8LATJdkh14=";
+      };
+      propagatedBuildInputs = with pfinal; [ numpy setuptools ];
+    };
+    itk = pfinal.buildPythonPackage rec {
+      pname = "itk";
+      version = "5.3.0";
+      format = "wheel";
+
+      src = final.fetchurl {
+        url = "https://files.pythonhosted.org/packages/48/49/5c0275fac7513434b2ff85afb495e2c408f4fc216f616914c09f4cf2a94c/itk-5.3.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl";
+        hash = "sha256-+xhql/6NgPQNAFj6Ywvoew6BtAPeo8+rqo6AmIL+KCI=";
+      };
+      propagatedBuildInputs = with pfinal; [
+        itk-core
+        itk-numerics
+        itk-io
+        itk-filtering
+        itk-segmentation
+        itk-registration
+        numpy
+      ];
+      pythonImportsCheck = [ "itk" ];
+    };
+    simpleitk = pprev.simpleitk.overridePythonAttrs (oa: {
+      propagatedBuildInputs = [ final.elastix final.itk final.simpleitk pfinal.numpy ];
+    });
     superintendent = pfinal.buildPythonPackage rec {
       pname = "superintendent";
       version = "0.6.0";
