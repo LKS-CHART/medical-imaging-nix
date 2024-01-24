@@ -113,6 +113,7 @@ in
         #llvmlite
         markupsafe
         matplotlib
+        mednext
         mistune
         mlflow
         monai
@@ -181,6 +182,7 @@ in
         scikitimage
         scikit-learn
         scipy
+        sentencepiece
         sqlalchemy
         terminado
         terminaltables
