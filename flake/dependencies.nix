@@ -181,6 +181,7 @@ in
         scikitimage
         scikit-learn
         scipy
+        sentencepiece
         sqlalchemy
         terminado
         terminaltables
