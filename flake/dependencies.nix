@@ -109,6 +109,7 @@ in
         python-hl7
         python-slugify
         pytz
+        pyxdg
         pyxnat
         pyyaml
         requests
