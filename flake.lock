@@ -54,16 +54,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1704223073,
-        "narHash": "sha256-ysOiwzZw6zLmWBEFc2almUelgFJ2o/IvzG0Kb9IFbLM=",
-        "owner": "nixos",
+        "lastModified": 1707514708,
+        "narHash": "sha256-npRg4rDV53UAz+r/g1qUEs3cfE43sr1tufWRcTkmOiQ=",
+        "owner": "bcdarwin",
         "repo": "nixpkgs",
-        "rev": "5bce5d1b085e901dee1ec51ca96d0facc5c1b94e",
+        "rev": "99472f96bdeed7857d947a80c81e8facc6674230",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "release-23.11",
+        "owner": "bcdarwin",
+        "ref": "mednext-backport",
         "repo": "nixpkgs",
         "type": "github"
       }

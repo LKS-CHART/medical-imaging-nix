@@ -113,6 +113,7 @@ in
         #llvmlite
         markupsafe
         matplotlib
+        mednext
         mistune
         mlflow
         monai
