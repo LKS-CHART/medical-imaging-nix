@@ -47,6 +47,18 @@
         ipywidgets ipycanvas palettable pillow ipyevents setupmeta numpy jupyter-packaging requests
       ];
     };
+    codetiming = pfinal.buildPythonPackage rec {
+      pname = "codetiming";
+      version = "1.4.0";
+      pyproject = true;
+
+      src = final.fetchPypi {
+        inherit pname version;
+        hash = "sha256-STe/kTooFCWLh+qqQ9mhuyRxH/01V6mraTT6H+O6Dbw=";
+      };
+
+      nativeBuildInputs = [ pfinal.flit-core ];
+    };
     superintendent = pfinal.buildPythonPackage rec {
       pname = "superintendent";
       version = "0.6.0";
@@ -69,12 +81,16 @@
         scikit-learn
         scipy
         sqlalchemy
+        sqlmodel
         pillow
         cachetools
+        codetiming
         psycopg2
         ipyevents
         typing-extensions
       ];
+
+      pythonImportsCheck = [ "superintendent" ];
     };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
