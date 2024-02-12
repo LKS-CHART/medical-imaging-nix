@@ -55,53 +55,6 @@
       pythonImportsCheck = [ "orthanc_xnat_tools" ];
     };
 
-    pillow-jpls = pfinal.buildPythonPackage rec {
-      pname = "pillow-jpls";
-      version = "1.2.0";
-      format = "wheel";
-
-      src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/72/f3/725fd022d58e95374c0c6e8e3d183126938ffec580583fa2bf24a453191d/pillow_jpls-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        hash = "sha256-zpOAh+TPpO4YtleDfHXTtISpa3ibTbq9E7B4k2slhEA=";
-      };
-
-      propagatedBuildInputs = with pprev; [ pillow ];
-    };
-
-    highdicom = let
-      test_data = prev.fetchFromGitHub {
-        owner = "pydicom";
-        repo = "pydicom-data";
-        rev = "cbb9b2148bccf0f550e3758c07aca3d0e328e768";
-        hash = "sha256-nF/j7pfcEpWHjjsqqTtIkW8hCEbuQ3J4IxpRk0qc1CQ=";
-      }; in
-    pfinal.buildPythonPackage rec {
-      pname = "highdicom";
-      version = "0.21.1";
-      src = final.fetchFromGitHub {
-        owner = "ImagingDataCommons";
-        repo = "highdicom";
-        rev = "refs/tags/v${version}";
-        hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
-      };
-
-      patches = [
-        (final.fetchpatch {
-          name = "pillow-10-api-updates";
-          url = "https://github.com/ImagingDataCommons/highdicom/commit/f453e7831e243e1f4d8493bfa79238a264c6e6b1.patch";
-          hash = "sha256-JUJv8oKpUWjHH15i6lpwYZj3giQzoT2Dq3XdHwbJ0Kc=";
-        })
-      ];
-
-      preCheck = ''
-        export HOME=$TMP/test-home
-        mkdir -p $HOME/.pydicom/
-        ln -s ${test_data}/data_store/data $HOME/.pydicom/data
-      '';
-
-      propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
-      nativeCheckInputs = with pprev; [ pytestCheckHook ];
-    };
     ipyevents = pfinal.buildPythonPackage rec {
       pname = "ipyevents";
       version = "2.0.1";
