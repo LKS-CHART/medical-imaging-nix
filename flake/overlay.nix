@@ -1,4 +1,13 @@
 { orthanc_xnat_tools_src }: final: prev: {
+  dcm2niix = prev.dcm2niix.overrideAttrs (as: {
+    patches = as.patches ++ [ (
+      prev.fetchpatch {
+        name = "fix-gantry-tilt-correction";
+        url = "https://github.com/cfhammill/dcm2niix/commit/02a4d1d3fb81a89761f969a50dd6b62ad3e3b16f.patch";
+        hash = "sha256-OJe0hUb8cucqWjPBi7O2VCBpDn+ePhOb5Eb1CulwPJs=";
+      }
+    ) ];
+  });
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
     bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
       version = "0.37.0";
