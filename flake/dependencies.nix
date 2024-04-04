@@ -44,6 +44,7 @@ in
     datasets
     deid
     einops
+    evaluate
     gensim
     grad-cam
     ipywidgets

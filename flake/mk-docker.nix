@@ -3,11 +3,11 @@
 with pkgs;
 with pkgs.dockerTools;
 
-buildImage {
+buildLayeredImage {
   name = "test-docker";
   tag = "test";
   created = "now";
-  copyToRoot = contents;
-  diskSize = 1024*80;
-  buildVMMemorySize = 1024*8;
+  contents = contents;
+  #diskSize = 1024*80;
+  #buildVMMemorySize = 1024*8;
 }  
