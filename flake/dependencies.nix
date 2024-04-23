@@ -30,6 +30,7 @@ in
   which
   curl wget
   zip unzip
+  openjdk
   pandoc quarto
   parallel
   ruff
