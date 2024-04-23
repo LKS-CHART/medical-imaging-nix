@@ -48,7 +48,9 @@ in
     gensim
     grad-cam
     ipywidgets
+    jaydebeapi
     jinja2
+    jpype1
     jupyter
     kaggle
     keyring
