@@ -91,6 +91,7 @@ in
         ipympl
         ipyannotations
         ipywidgets
+        itk
         superintendent
         nibabel
         nipype
