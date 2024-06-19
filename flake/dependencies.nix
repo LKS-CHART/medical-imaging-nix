@@ -41,7 +41,6 @@ in
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (python311.withPackages (ps: with ps; [
-        attrs
         avro
         backcall
         batchgenerators
@@ -92,7 +91,9 @@ in
         (lib.lists.head psycopg.passthru.optional-dependencies.pool)
         pillow
         pip
+        polars
         prometheus-client
+        pyarrow
         pycm
         pydicom
         pynetdicom
@@ -107,7 +108,6 @@ in
         python-dateutil
         python-dotenv
         python-hl7
-        python-slugify
         pytz
         pyxdg
         pyxnat
@@ -117,7 +117,6 @@ in
         scikitimage
         scikit-learn
         scipy
-        secretstorage
         sqlalchemy
         polars
         pydantic
@@ -125,19 +124,20 @@ in
         pytorch-lightning
         simpleitk
         statsmodels
+        summarytools
         tensorboard
         torchio
         torchvision
         torchmetrics
         tqdm
         traitlets
-        transaction
         transformers
         ttach
-        typing-extensions
         urllib3
         widgetsnbextension
         xnatpy
+        xlrd
+        ydata-profiling
         zipp
     ]))
 ]
