@@ -9,39 +9,13 @@
     ) ];
   });
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
-    bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
-      version = "0.37.0";
-      src = final.fetchFromGitHub {
-        owner = "TimDettmers";
-        repo = "bitsandbytes";
-        rev = "refs/tags/${version}";
-        hash = "sha256-f47oUHWxGxXXAwXUsPrnVKW5Vj/ncWnHWfEk1kQ1K+c=";
-      };
-    });
-    # highdicom tests don't pass with 2.4.x:
-    pydicom = pprev.pydicom.overridePythonAttrs (oa: rec {
-      version = "2.3.1";
-      src = final.fetchFromGitHub {
-        owner = "pydicom";
-        repo = "pydicom";
-        rev = "refs/tags/v2.3.1";
-        hash = "sha256-xt0aK908lLgNlpcI86OSxy96Z/PZnQh7+GXzJ0VMQGA=";
-      };
-      disabledTests = pprev.pydicom.disabledTests ++ [
-        "TestNumpy_NumpyHandler"
-        "test_can_access_unsupported_dataset"
-      ];
-    });
     # see https://github.com/NixOS/nixpkgs/issues/252616
     albumentations = pprev.albumentations.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
     });
+    # see https://github.com/NixOS/nixpkgs/issues/252616
     qudida = pprev.qudida.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
-    });
-    # random failing diffusion test with downgraded pydicom; don't really care
-    nibabel = pprev.nibabel.overridePythonAttrs (oa: {
-      disabledTests = oa.disabledTests ++ [ "test_diffusion_parameters_strict_sort" ];
     });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
@@ -125,20 +99,6 @@
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
     };
-    python-hl7 = pfinal.buildPythonPackage rec {
-      pname = "python-hl7";
-      version = "0.4.5";
-      format = "pyproject";
-      src = final.fetchFromGitHub {
-        owner = "johnpaulett";
-        repo = "python-hl7";
-        rev = "refs/tags/${version}";
-        hash = "sha256-9uFdyL4+9KSWXflyOMOeUudZTv4NwYPa0ADNTmuVbqo=";
-      };
-      nativeBuildInputs = with pfinal; [ setuptools wheel ];
-      nativeCheckInputs = with pfinal; [ pytestCheckHook ];
-      pythonImportsCheck = [ "hl7" ];
-    };
     mdai = pfinal.buildPythonPackage rec {
       pname = "mdai";
       version = "0.12.2";
@@ -197,14 +157,6 @@
       postPatch = ''
          substituteInPlace setup.py --replace "psycopg2-binary" "psycopg2"
       '';
-    };
-    charticles = with final; rPackages.buildRPackage {
-      name = "charticles";
-      src = fetchgit {
-        url = "ssh://git@github.com/LKS-CHART/charticles";
-        rev = "3bf371f";
-        sha256 = "qYUpliKrEFM4PVOUrSfh/2Iffl898lL78zb9iVskc7c=";
-      };
     };
   }; };
 }
