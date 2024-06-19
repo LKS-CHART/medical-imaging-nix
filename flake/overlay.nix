@@ -9,39 +9,13 @@
     ) ];
   });
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
-    bitsandbytes = pprev.bitsandbytes.overrideAttrs (oa: rec {
-      version = "0.37.0";
-      src = final.fetchFromGitHub {
-        owner = "TimDettmers";
-        repo = "bitsandbytes";
-        rev = "refs/tags/${version}";
-        hash = "sha256-f47oUHWxGxXXAwXUsPrnVKW5Vj/ncWnHWfEk1kQ1K+c=";
-      };
-    });
-    # highdicom tests don't pass with 2.4.x:
-    pydicom = pprev.pydicom.overridePythonAttrs (oa: rec {
-      version = "2.3.1";
-      src = final.fetchFromGitHub {
-        owner = "pydicom";
-        repo = "pydicom";
-        rev = "refs/tags/v2.3.1";
-        hash = "sha256-xt0aK908lLgNlpcI86OSxy96Z/PZnQh7+GXzJ0VMQGA=";
-      };
-      disabledTests = pprev.pydicom.disabledTests ++ [
-        "TestNumpy_NumpyHandler"
-        "test_can_access_unsupported_dataset"
-      ];
-    });
     # see https://github.com/NixOS/nixpkgs/issues/252616
     albumentations = pprev.albumentations.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
     });
+    # see https://github.com/NixOS/nixpkgs/issues/252616
     qudida = pprev.qudida.overridePythonAttrs (oa: {
       pythonImportsCheck = [ ];
-    });
-    # random failing diffusion test with downgraded pydicom; don't really care
-    nibabel = pprev.nibabel.overridePythonAttrs (oa: {
-      disabledTests = oa.disabledTests ++ [ "test_diffusion_parameters_strict_sort" ];
     });
     orthanc-xnat-tools = pfinal.buildPythonPackage rec {
       pname = "orthanc-xnat-tools";
@@ -55,53 +29,6 @@
       pythonImportsCheck = [ "orthanc_xnat_tools" ];
     };
 
-    pillow-jpls = pfinal.buildPythonPackage rec {
-      pname = "pillow-jpls";
-      version = "1.2.0";
-      format = "wheel";
-
-      src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/72/f3/725fd022d58e95374c0c6e8e3d183126938ffec580583fa2bf24a453191d/pillow_jpls-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        hash = "sha256-zpOAh+TPpO4YtleDfHXTtISpa3ibTbq9E7B4k2slhEA=";
-      };
-
-      propagatedBuildInputs = with pprev; [ pillow ];
-    };
-
-    highdicom = let
-      test_data = prev.fetchFromGitHub {
-        owner = "pydicom";
-        repo = "pydicom-data";
-        rev = "cbb9b2148bccf0f550e3758c07aca3d0e328e768";
-        hash = "sha256-nF/j7pfcEpWHjjsqqTtIkW8hCEbuQ3J4IxpRk0qc1CQ=";
-      }; in
-    pfinal.buildPythonPackage rec {
-      pname = "highdicom";
-      version = "0.21.1";
-      src = final.fetchFromGitHub {
-        owner = "ImagingDataCommons";
-        repo = "highdicom";
-        rev = "refs/tags/v${version}";
-        hash = "sha256-HAKlRt3kRM3OPpUwJ4jnZYUt3rtfjjdgsE/tQCHt1WI";
-      };
-
-      patches = [
-        (final.fetchpatch {
-          name = "pillow-10-api-updates";
-          url = "https://github.com/ImagingDataCommons/highdicom/commit/f453e7831e243e1f4d8493bfa79238a264c6e6b1.patch";
-          hash = "sha256-JUJv8oKpUWjHH15i6lpwYZj3giQzoT2Dq3XdHwbJ0Kc=";
-        })
-      ];
-
-      preCheck = ''
-        export HOME=$TMP/test-home
-        mkdir -p $HOME/.pydicom/
-        ln -s ${test_data}/data_store/data $HOME/.pydicom/data
-      '';
-
-      propagatedBuildInputs = with pfinal; [ numpy pillow pillow-jpls pydicom ];
-      nativeCheckInputs = with pprev; [ pytestCheckHook ];
-    };
     ipyevents = pfinal.buildPythonPackage rec {
       pname = "ipyevents";
       version = "2.0.1";
@@ -130,6 +57,18 @@
         ipywidgets ipycanvas palettable pillow ipyevents setupmeta numpy jupyter-packaging requests
       ];
     };
+    codetiming = pfinal.buildPythonPackage rec {
+      pname = "codetiming";
+      version = "1.4.0";
+      pyproject = true;
+
+      src = final.fetchPypi {
+        inherit pname version;
+        hash = "sha256-STe/kTooFCWLh+qqQ9mhuyRxH/01V6mraTT6H+O6Dbw=";
+      };
+
+      nativeBuildInputs = [ pfinal.flit-core ];
+    };
     superintendent = pfinal.buildPythonPackage rec {
       pname = "superintendent";
       version = "0.6.0";
@@ -152,12 +91,16 @@
         scikit-learn
         scipy
         sqlalchemy
+        sqlmodel
         pillow
         cachetools
+        codetiming
         psycopg2
         ipyevents
         typing-extensions
       ];
+
+      pythonImportsCheck = [ "superintendent" ];
     };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
@@ -171,20 +114,6 @@
                                            ];
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
-    };
-    python-hl7 = pfinal.buildPythonPackage rec {
-      pname = "python-hl7";
-      version = "0.4.5";
-      format = "pyproject";
-      src = final.fetchFromGitHub {
-        owner = "johnpaulett";
-        repo = "python-hl7";
-        rev = "refs/tags/${version}";
-        hash = "sha256-9uFdyL4+9KSWXflyOMOeUudZTv4NwYPa0ADNTmuVbqo=";
-      };
-      nativeBuildInputs = with pfinal; [ setuptools wheel ];
-      nativeCheckInputs = with pfinal; [ pytestCheckHook ];
-      pythonImportsCheck = [ "hl7" ];
     };
     mdai = pfinal.buildPythonPackage rec {
       pname = "mdai";
@@ -244,14 +173,6 @@
       postPatch = ''
          substituteInPlace setup.py --replace "psycopg2-binary" "psycopg2"
       '';
-    };
-    charticles = with final; rPackages.buildRPackage {
-      name = "charticles";
-      src = fetchgit {
-        url = "ssh://git@github.com/LKS-CHART/charticles";
-        rev = "3bf371f";
-        sha256 = "qYUpliKrEFM4PVOUrSfh/2Iffl898lL78zb9iVskc7c=";
-      };
     };
   }; };
 }
