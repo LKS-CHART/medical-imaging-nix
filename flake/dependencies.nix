@@ -46,6 +46,9 @@ in
     deid
     einops
     evaluate
+    flask
+    faiss
+    fastapi
     gensim
     grad-cam
     ipywidgets
@@ -99,6 +102,7 @@ in
     sentence-transformers
     sentencepiece
     spacy
+    spacy-transformers
     statsmodels
     tensorboard
     tensorboardx
@@ -108,6 +112,7 @@ in
     torchvision
     tqdm
     transformers
+    vllm
     xformers
     xlrd
     ]))

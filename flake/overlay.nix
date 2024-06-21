@@ -45,5 +45,20 @@
 
       pythonImportsCheck = [ "superintendent" ];
     };
+    vllm = pprev.vllm.overrideAttrs {
+      postPatch =
+        ''
+      substituteInPlace requirements.txt \
+        --replace "xformers == 0.0.23.post1" "xformers == 0.0.24"
+      substituteInPlace requirements.txt \
+        --replace "cupy-cuda12x == 12.1.0" "cupy == 12.3.0"
+      substituteInPlace requirements-build.txt \
+        --replace "torch==2.1.2" "torch == 2.2.1"
+      substituteInPlace pyproject.toml \
+        --replace "torch == 2.1.2" "torch == 2.2.1"
+      substituteInPlace requirements.txt \
+        --replace "torch == 2.1.2" "torch == 2.2.1"
+    '';
+    };
   }; };
 }
