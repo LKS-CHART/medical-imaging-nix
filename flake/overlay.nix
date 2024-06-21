@@ -60,5 +60,19 @@
         --replace "torch == 2.1.2" "torch == 2.2.1"
     '';
     };
+    mistralai = pfinal.buildPythonPackage rec {
+      pname = "mistralai";
+      version = "0.4.1";
+      pyproject = true;
+      src = final.fetchFromGitHub {
+        owner="mistralai";
+        repo="client-python";
+        rev="0.4.1";
+        hash = "sha256-4FkQXqE/oJr3xNwp5qdX/aFHTpJCwMqzHREgbiO5VTA=";
+      };
+      nativeBuildInputs = [ pfinal.poetry-core ];
+      propagatedBuildInputs = with pfinal; [ orjson pydantic httpx ];
+      pythonImportCheckds = [ "mistralai" ];
+    };
   }; };
 }

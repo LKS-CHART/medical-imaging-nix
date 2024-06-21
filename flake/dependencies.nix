@@ -63,6 +63,7 @@ in
     langchain-community
     llm
     matplotlib
+    mistralai
     mlflow
     nbdev
     nbformat
