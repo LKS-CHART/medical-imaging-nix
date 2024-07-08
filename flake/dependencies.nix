@@ -41,6 +41,10 @@ in
   (python311.withPackages (ps: with ps; [
     accelerate
     bitsandbytes
+    dash
+    dash-bootstrap-components
+    dash-core-components
+    dash-html-components
     dask
     datasets
     deid
@@ -71,6 +75,7 @@ in
     nltk
     numpy
     openpyxl
+    ps.ollama
     pandas
     peft
     pillow
