@@ -100,6 +100,7 @@ in
     pywavelets
     pyxdg
     pyyaml
+    rapidocr-onnxruntime
     requests
     safetensors
     scikit-learn

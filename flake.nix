@@ -3,7 +3,7 @@
 
   # Nixpkgs / NixOS version to use.
   inputs = {
-    nixpkgs.url = "github:cfhammill/nixpkgs/cupy-fix";
+    nixpkgs.url = "github:cfhammill/nixpkgs/text-deps-fixes";
     #nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
     #nixGL.url = "github:nix-community/nixGL";
     nixGL.url = "github:cfhammill/nixGL";

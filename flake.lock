@@ -54,16 +54,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1720201662,
-        "narHash": "sha256-HKY3tyrJ9SGYIR3Qnca4gsLC5Ez0c0JhIjwJGGriiYo=",
+        "lastModified": 1720637830,
+        "narHash": "sha256-y0CB/pL6ANiPElx/BOfMJiR1iutUBiayrBPDnk433f0=",
         "owner": "cfhammill",
         "repo": "nixpkgs",
-        "rev": "4d26254c1e0205c91c8c2fa713196451a85a2bb2",
+        "rev": "dab19499c6b31ebfedc9cc4db856e8b17db9cef7",
         "type": "github"
       },
       "original": {
         "owner": "cfhammill",
-        "ref": "cupy-fix",
+        "ref": "text-deps-fixes",
         "repo": "nixpkgs",
         "type": "github"
       }
