@@ -34,6 +34,7 @@ in
   pandoc quarto
   parallel
   ruff
+  sudo
   cudaPackages.cudatoolkit
   ] ++ glWrappers ++ [
   autoGlWrapper
