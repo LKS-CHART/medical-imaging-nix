@@ -103,6 +103,7 @@ in
     pyyaml
     rapidocr-onnxruntime
     requests
+    rsconnect-python
     safetensors
     scikit-learn
     scipy
