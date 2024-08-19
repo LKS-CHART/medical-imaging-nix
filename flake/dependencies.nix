@@ -49,6 +49,7 @@ in
     dask
     datasets
     deid
+    duckdb
     einops
     evaluate
     flask
