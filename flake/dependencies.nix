@@ -74,7 +74,6 @@ in
         matplotlib
         mistune
         monai
-        mdai
         nbclient
         nbconvert
         nbformat
@@ -117,6 +116,7 @@ in
         scikitimage
         scikit-learn
         scipy
+        skops
         sqlalchemy
         polars
         pydantic
@@ -137,7 +137,7 @@ in
         widgetsnbextension
         xnatpy
         xlrd
-        ydata-profiling
+        #ydata-profiling
         zipp
     ]))
 ]

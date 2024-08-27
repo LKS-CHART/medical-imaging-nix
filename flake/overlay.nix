@@ -1,13 +1,4 @@
 { orthanc_xnat_tools_src }: final: prev: {
-  dcm2niix = prev.dcm2niix.overrideAttrs (as: {
-    patches = as.patches ++ [ (
-      prev.fetchpatch {
-        name = "fix-gantry-tilt-correction";
-        url = "https://github.com/cfhammill/dcm2niix/commit/02a4d1d3fb81a89761f969a50dd6b62ad3e3b16f.patch";
-        hash = "sha256-OJe0hUb8cucqWjPBi7O2VCBpDn+ePhOb5Eb1CulwPJs=";
-      }
-    ) ];
-  });
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
     # see https://github.com/NixOS/nixpkgs/issues/252616
     albumentations = pprev.albumentations.overridePythonAttrs (oa: {
@@ -114,25 +105,6 @@
                                            ];
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
-    };
-    mdai = pfinal.buildPythonPackage rec {
-      pname = "mdai";
-      version = "0.12.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "XC6n5fLMMQwkgSgxTyswUydGh+K6WqMzOJEkOZt0DPI=";
-      };
-      nativeBuildInputs = [ final.patchelf pprev.poetry-core ];
-      propagatedBuildInputs = with pfinal; [ arrow matplotlib nibabel numpy opencv4 pandas pillow
-	                                           pydicom requests retrying scikitimage tqdm dicom2nifti
-                                             pyyaml
-                                           ];
-      format = "pyproject";
-      pythonImportsCheck = [ "mdai" ];
-
-      postPatch = ''
-        substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""
-      '';
     };
     logging_tree = pfinal.buildPythonPackage rec {
       pname = "logging_tree";
