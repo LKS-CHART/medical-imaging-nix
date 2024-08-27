@@ -116,6 +116,7 @@ in
         scikitimage
         scikit-learn
         scipy
+        skops
         sqlalchemy
         polars
         pydantic
