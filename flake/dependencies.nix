@@ -137,7 +137,7 @@ in
         widgetsnbextension
         xnatpy
         xlrd
-        ydata-profiling
+        #ydata-profiling
         zipp
     ]))
 ]
