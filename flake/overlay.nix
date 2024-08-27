@@ -106,25 +106,6 @@
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
     };
-    mdai = pfinal.buildPythonPackage rec {
-      pname = "mdai";
-      version = "0.12.2";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "XC6n5fLMMQwkgSgxTyswUydGh+K6WqMzOJEkOZt0DPI=";
-      };
-      nativeBuildInputs = [ final.patchelf pprev.poetry-core ];
-      propagatedBuildInputs = with pfinal; [ arrow matplotlib nibabel numpy opencv4 pandas pillow
-	                                           pydicom requests retrying scikitimage tqdm dicom2nifti
-                                             pyyaml
-                                           ];
-      format = "pyproject";
-      pythonImportsCheck = [ "mdai" ];
-
-      postPatch = ''
-        substituteInPlace pyproject.toml --replace 'opencv-python ="*"' ""
-      '';
-    };
     logging_tree = pfinal.buildPythonPackage rec {
       pname = "logging_tree";
       version = "1.9";

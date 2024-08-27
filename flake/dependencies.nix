@@ -74,7 +74,6 @@ in
         matplotlib
         mistune
         monai
-        mdai
         nbclient
         nbconvert
         nbformat
