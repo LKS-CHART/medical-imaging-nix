@@ -41,7 +41,6 @@ in
   age
   ] ++ glWrappers ++ [
   autoGlWrapper
-  (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
   (python311.withPackages (ps: with ps; [
         avro
         backcall
@@ -51,8 +50,10 @@ in
         deid
         entrypoints
         einops
+        finetuning-scheduler
         grad-cam
-        ignite
+        great-tables
+        ibis-framework
         imageio
         importlib-metadata
         ipykernel
@@ -61,6 +62,7 @@ in
         ipympl
         ipyannotations
         ipywidgets
+        itk
         superintendent
         nibabel
         antspyx
@@ -137,7 +139,9 @@ in
         widgetsnbextension
         xnatpy
         xlrd
-        #ydata-profiling
+        ydata-profiling
         zipp
-    ]))
+      ] ++ ibis-framework.optional-dependencies.postgres
+        ++ ibis-framework.optional-dependencies.duckdb
+        ++ ibis-framework.optional-dependencies.polars))
 ]

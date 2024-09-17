@@ -4,7 +4,6 @@
   # Nixpkgs / NixOS version to use.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    #nixGL.url = "github:guibou/nixGL";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -31,6 +30,7 @@
       # Nvidia drivers to support
       supportedNvidiaDrivers = [
         "535.154.05"
+        "535.183.06"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
