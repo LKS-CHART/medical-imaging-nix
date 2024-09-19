@@ -1,13 +1,10 @@
 { pkgs, contents }:
 
-with pkgs;
-with pkgs.dockerTools;
+pkgs.dockerTools.streamLayeredImage {
+  name = "medical-imaging-nix";
+  tag = "latest";
 
-buildImage {
-  name = "test-docker";
-  tag = "test";
   created = "now";
-  copyToRoot = contents;
-  diskSize = 1024*80;
-  buildVMMemorySize = 1024*8;
-}  
+
+  inherit contents;
+}
