@@ -85,7 +85,6 @@ in
         orthanc-xnat-tools
         packaging
         pandas
-        pgnotify
         psycopg
         (lib.lists.head psycopg.passthru.optional-dependencies.pool)
         pillow

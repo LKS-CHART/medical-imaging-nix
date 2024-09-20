@@ -106,45 +106,5 @@
       format = "wheel";
       pythonImportsCheck = [ "ants" ];
     };
-    logging_tree = pfinal.buildPythonPackage rec {
-      pname = "logging_tree";
-      version = "1.9";
-      src = final.fetchFromGitHub {
-        owner = "brandon-rhodes";
-        repo = "logging_tree";
-        rev = "b2d7cee13c0fe0a2601b5a2b705ff59375978a2f";
-        sha256 = "wNAoiMXT9gO+eQc7RmtJ80YmwfEPf+JkmlGg3Ot2WFE=";
-      };
-      pythonImportsCheck = [ "logging_tree" ];
-    };
-    logx = pfinal.buildPythonPackage rec {
-      pname = "logx";
-      version = "0.1.1579232358";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "1EYJAJesg3B9ebHfmP+Xf/cXJyGktjpdQH49CM8XHhU=";
-      };
-      pythonImportsCheck = [ "logx" ];
-      nativeBuildInputs = [ pfinal.setuptools ];
-      propagatedBuildInputs = with pfinal; [ 
-        pyyaml logging_tree
-      ];
-      format = "pyproject";
-    };
-    pgnotify = pfinal.buildPythonPackage rec {
-      pname = "pgnotify";
-      version = "0.1.1561372201";
-      src = pfinal.fetchPypi {
-        inherit pname version;
-        sha256 = "UJ3+Qv3ibG6rBmaYrcZ5zwJr9tGi/uoO1Y139sN2zpk=";
-      };
-      pythonImportsCheck = [ "pgnotify" ];
-      propagatedBuildInputs = with pfinal; [ 
-        logx psycopg2 six
-      ];
-      postPatch = ''
-         substituteInPlace setup.py --replace "psycopg2-binary" "psycopg2"
-      '';
-    };
   }; };
 }
