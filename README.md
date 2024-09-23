@@ -2,7 +2,7 @@
 
 A nix flake based environment that can be used as a starting point for medical imaging data science projects.
 The environment contains R, python, jupyter, a suite of tools for working with medical imaging files, pytorch and tensorflow with
-GPU support enabled. The environment can be compiled into a singularity container for portability to places that don't have nix.
+GPU support enabled. The environment can be compiled into a Docker container for portability to places that don't have Nix.
 To get started with the environment you need nix installed with flakes enabled.
 
 With that a new project can be initialized as simply as:
@@ -20,7 +20,7 @@ to nix develop will drop you into your shiny new environment. If you're ready to
 a container you can run:
 
 ```sh
-nix build .#singularity
+nix build .#docker
 ```
 
 this takes a bit of time, so maybe start it before your next meeting.
