@@ -116,6 +116,7 @@ in
         scikitimage
         scikit-learn
         scipy
+        sentry-sdk
         skops
         sqlalchemy
         polars
