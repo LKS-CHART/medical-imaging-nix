@@ -1,5 +1,6 @@
 { orthanc_xnat_tools_src }: final: prev: {
   python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
+    keras = null;
     codetiming = pfinal.buildPythonPackage rec {
       pname = "codetiming";
       version = "1.4.0";
