@@ -9,7 +9,6 @@
    in
      {devShell = forAllSystems (system: mi-flake.devShell.${system});
       packages = forAllSystems (system: { docker = mi-flake.packages.${system}.docker;
-                                          singularity = mi-flake.packages.${system}.singularity;
                                         });
       defaultPackage = forAllSystems (system: self.defaultPackage.${system});
      };

@@ -67,9 +67,6 @@
         });
       packages = forAllSystems (
         system: { 
-          singularity = import ./flake/mk-singularity.nix {pkgs = nixpkgsFor.${system}; 
-                                                               contents = contentsFor.${system}; 
-                                                              };
           docker = import ./flake/mk-docker.nix {pkgs = nixpkgsFor.${system};
                                                      contents = contentsFor.${system};
                                                     };
