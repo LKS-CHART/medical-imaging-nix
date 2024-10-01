@@ -37,6 +37,8 @@ in
   parallel
   ruff
   sudo
+  sops
+  age
   ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
@@ -69,8 +71,6 @@ in
         jupyter_console
         jupyterlab-pygments
         jupyterlab-widgets
-        keyring
-        keyrings-cryptfile
         matplotlib
         mistune
         monai
