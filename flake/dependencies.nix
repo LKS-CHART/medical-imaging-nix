@@ -111,6 +111,7 @@ in
     seaborn
     sentence-transformers
     sentencepiece
+    sentry-sdk
     spacy
     spacy-transformers
     statsmodels
