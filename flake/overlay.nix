@@ -1,5 +1,5 @@
 { orthanc_xnat_tools_src }: final: prev: {
-  python311 = prev.python311.override { packageOverrides = pfinal: pprev: {
+  python312 = prev.python312.override { packageOverrides = pfinal: pprev: {
 
     # see https://github.com/NixOS/nixpkgs/issues/252616
     albumentations = pprev.albumentations.overridePythonAttrs (oa: {
@@ -92,10 +92,10 @@
     };
     antspyx = pfinal.buildPythonPackage rec {
       pname = "antspyx";
-      version = "0.3.8";
+      version = "0.4.2";
       src = final.fetchurl {
-        url = "https://files.pythonhosted.org/packages/dd/2f/a81d5629ef8e545cffd86368756962682a7386a80601fe35387e4aaffa23/antspyx-0.3.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
-        hash = "sha256-q6xozoAph9JZ0naXX4vRbqsj6kldeH9WAe2R4CZDIS0=";
+        url = "https://files.pythonhosted.org/packages/ce/4b/75898878691fe4d5f15405419f34cc9041e305c992e204d73c88342e11a1/antspyx-0.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl";
+        hash = "sha256-sXwcHzE2FVx6g8xfKcKQFKxYd/o5TPJtUIMDxqQThlY=";
       };
       propagatedBuildInputs = with pfinal; [ matplotlib pyyaml scikitimage scikit-learn chart-studio nibabel statsmodels
                                              webcolors
