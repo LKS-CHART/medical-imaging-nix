@@ -41,7 +41,7 @@ in
   age
   ] ++ glWrappers ++ [
   autoGlWrapper
-  (python311.withPackages (ps: with ps; [
+  (python312.withPackages (ps: with ps; [
         avro
         backcall
         batchgenerators
