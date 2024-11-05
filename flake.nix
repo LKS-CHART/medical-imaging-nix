@@ -8,7 +8,7 @@
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
     orthanc_xnat_tools_src = {
-      url = "git+ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools";
+      url = "git+ssh://git@git.unity.local/dsaa/orthanc-xnat-tools";
       flake = false;
     };
  

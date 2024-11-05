@@ -77,11 +77,11 @@
         "rev": "50339ec8501c0324d4e3e7598c5591e2ecddfbf1",
         "revCount": 19,
         "type": "git",
-        "url": "ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@git.unity.local/dsaa/orthanc-xnat-tools"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@curtcsrv.unity.local:12222/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@git.unity.local/dsaa/orthanc-xnat-tools"
       }
     },
     "root": {
