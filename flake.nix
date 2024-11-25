@@ -8,10 +8,10 @@
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
     orthanc_xnat_tools_src = {
-      url = "git+ssh://git@git.unity.local/dsaa/orthanc-xnat-tools";
+      url = "git+ssh://git@git.unity.local/dsaa/orthanc-xnat-tools?ref=add-series-zip-getter";
       flake = false;
     };
- 
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -40,15 +40,15 @@
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (
-        system: import nixpkgs { 
-          inherit system; 
+        system: import nixpkgs {
+          inherit system;
           config.allowUnfree = true;
           config.cudaSupport = true;
           config.cudaCapabilities = [
             "7.5"
             "8.0"
           ];
-          overlays = [ pkgsOverlay.${system} nixGL.overlay ]; 
+          overlays = [ pkgsOverlay.${system} nixGL.overlay ];
         });
 
       # Import the relevant dependencies
@@ -62,11 +62,11 @@
 
     {
       devShell = forAllSystems (
-        system: import ./flake/devenv.nix { 
-          pkgs = nixpkgsFor.${system}; contents = contentsFor.${system}; 
+        system: import ./flake/devenv.nix {
+          pkgs = nixpkgsFor.${system}; contents = contentsFor.${system};
         });
       packages = forAllSystems (
-        system: { 
+        system: {
           docker = import ./flake/mk-docker.nix {pkgs = nixpkgsFor.${system};
                                                      contents = contentsFor.${system};
                                                     };
