@@ -51,6 +51,7 @@ in
         entrypoints
         einops
         finetuning-scheduler
+        fastapi
         grad-cam
         great-tables
         ibis-framework
@@ -122,6 +123,7 @@ in
         sqlalchemy
         polars
         pydantic
+        pydantic-settings
         torch
         pytorch-lightning
         simpleitk
@@ -136,6 +138,7 @@ in
         transformers
         ttach
         urllib3
+        uvicorn
         widgetsnbextension
         xnatpy
         xlrd
