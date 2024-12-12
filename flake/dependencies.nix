@@ -75,6 +75,7 @@ in
         jupyterlab-widgets
         matplotlib
         mistune
+        mlflow
         monai
         nbclient
         nbconvert
