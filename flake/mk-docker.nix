@@ -1,8 +1,8 @@
-{ pkgs, contents }:
+{ pkgs, contents, tag }:
 
 pkgs.dockerTools.streamLayeredImage {
   name = "medical-imaging-nix";
-  tag = "latest";
+  inherit tag;
 
   created = "now";
 
