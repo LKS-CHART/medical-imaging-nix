@@ -68,7 +68,8 @@
       packages = forAllSystems (
         system: { 
           docker = import ./flake/mk-docker.nix {pkgs = nixpkgsFor.${system};
-                                                     contents = contentsFor.${system};
+                                                 contents = contentsFor.${system};
+                                                 tag = self.dirtyShortRev;
                                                     };
         });
       templates = {
