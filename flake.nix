@@ -69,7 +69,7 @@
         system: { 
           docker = import ./flake/mk-docker.nix {pkgs = nixpkgsFor.${system};
                                                  contents = contentsFor.${system};
-                                                 tag = self.dirtyShortRev;
+                                                 tag = self.shortRev or self.dirtyShortRev;
                                                     };
         });
       templates = {
