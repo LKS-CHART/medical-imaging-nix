@@ -12,191 +12,30 @@ let
   autoGlWrapper = import ./glWrapper.nix {inherit pkgs; };
 in
 [
-  coreutils
-  stdenv
-  glibcLocales
-  fontconfig
-  gnugrep
-  gnutar
-  gnused
-  gawk
-  watch
-  openssl
-  bashInteractive
-  git gdown git-annex
-  openssh
-  less
-  which
-  curl wget
-  zip unzip
+  #coreutils
+  #git
+  #which
+  #curl wget
+  #zip unzip
+  dockerTools.binSh
   pigz  # for dcm2niix
-  dcm2niix gdcm
-  parallel
+  dcm2niix
   ] ++ glWrappers ++ [
   autoGlWrapper
-  (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
     (python310.withPackages (ps: with ps; [
         addict
         albumentations
-        attrs
-        avro
-        backcall
-        batchgenerators
-        bleach
         catboost
-        certifi
-        cffi
-        chardet
-        cloudpickle
-        cryptography
-        cycler
-        datasets
-        #debugpy  # pulls in gdb
-        decorator
-        defusedxml
-        deid
-        #efficientnet-pytorch
-        entrypoints
-        einops
-        grad-cam
-        greenlet
-        h5py
-        highdicom
-        httplib2
-        hupper
-        idna
-        ignite
-        imageio
-        importlib-metadata
-        ipykernel
-        ipython
-        ipyniivue
-        ipympl
-        ipyannotations
-        ipywidgets
-        sentry-sdk
-        superintendent
-        nibabel
-        iso8601
-        jedi
-        jinja2
-        joblib
-        jsonschema
-        jupyter
-        jupyter-client
-        jupyter_console
-        jupyterlab-pygments
-        jupyterlab-widgets
-        kaggle
-        keyring
-        keyrings-cryptfile
-        kiwisolver
         lightgbm
-        markupsafe
-        matplotlib
-        mistune
-        msgpack
-        munch
-        mdai
-        nbclient
-        nbconvert
-        nbformat
-        networkx
-        notebook
         numpy
-        oauthlib
-        openpyxl
-        #orthanc-rest-client
-        orthanc-xnat-tools
-        packaging
         pandas
-        parso
-        PasteDeploy
-        pbkdf2
-        pexpect
-        #pfmisc
-        pgnotify
-        psycopg2
-        pickleshare
-        pillow
-        pip
-        plaster
-        plaster-pastedeploy
         pretrainedmodels
-        prometheus-client
-        prompt-toolkit
-        protobuf
-        ptyprocess
-        pudb
-        pycm
-        pycparser
-        pycrypto
         pydicom
-        dicomweb-client
-        pynetdicom
-        pygments
         pynvml
-        pyodbc
-        pyorthanc
-        pyparsing
-        #pypx
-        pyramid
-        #pyramid_mailer
-        pyrsistent
-        pytest
-        python-dateutil
-        pytest-dotenv
-        python-hl7
-        python-slugify
-        python3-openid
-        pytz
-        pyxdg
-        pyxnat
-        pyyaml
-        requests
-        requests_oauthlib
-        safetensors
-        scikitimage
         scikit-learn
-        scipy
-        secretstorage
-        #slicer
-        sqlalchemy
-        tables
-        terminado
-        terminaltables
-        testpath
-        text-unidecode
-        polars
         torch
-        pytorch-lightning
-        rising
-        seaborn
-        sentencepiece
-        statsmodels
-        tensorboard
-        tensorboardx
         torchvision
-        torchmetrics
-        #timm
-        tomlkit
-        tornado
         tqdm
-        traitlets
-        transaction
-        transformers
-        translationstring
-        ttach
-        typing-extensions
-        urllib3
-        urwid
-        venusian
-        wcwidth
-        webencodings
-        widgetsnbextension
-        wtforms
         xgboost
-        xnatpy
-        zipp
     ]))
 ]
