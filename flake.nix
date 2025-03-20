@@ -46,7 +46,13 @@
           config.allowUnfree = true;
           config.cudaSupport = true;
           config.cudaCapabilities = [
-            "8.0"
+            "5.2" # M60
+            "7.0" # V100
+            "7.5" # T4
+            "8.0" # A100
+            "8.6" # A10
+            #"8.9" # L4, L40, L40S
+            #"9.0" # H100, H200
           ];
           overlays = [ nixGL.overlay nur.overlay pkgsOverlay.${system} ]; 
         });
