@@ -10,7 +10,7 @@
     nur.url = "github:nix-community/NUR?rev=02f3cbbe58e290ef9759294c8d6a0ac5779a512a";
 
     orthanc_xnat_tools_src = {
-      url = "git+ssh://git@172.27.10.122:12222/dsaa/orthanc-xnat-tools";
+      url = "git+ssh://git@git.unity.local/dsaa/mi/orthanc-xnat-tools?ref=switch-to-procedure-number";
       flake = false;
     };
  
