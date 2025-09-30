@@ -32,6 +32,7 @@ in
   pigz  # for dcm2niix
   dcm2niix gdcm
   parallel
+  sops
   ] ++ glWrappers ++ [
   autoGlWrapper
   (emacsWithPackages (ps: with ps; [ magit ess poly-R elpy nix-mode ]))
