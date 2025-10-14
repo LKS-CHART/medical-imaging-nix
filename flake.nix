@@ -3,7 +3,7 @@
 
   # Nixpkgs / NixOS version to use.
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
