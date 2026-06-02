@@ -4,9 +4,9 @@ with pkgs;
 
 let
   relevantDrivers =
-    with builtins; filter (e: elem e.version nvidiaDrivers) nixgl.knownNvidiaDrivers;
+    with builtins; filter (e: elem e.version nvidiaDrivers) (attrValues (mapAttrs (k: v: v // {version = k;}) nixgl.knownNvidiaDrivers));
   glWrappers =
-    builtins.map (d:
+    with builtins; map (d:
       (nixgl.override {nvidiaVersion = d.version; nvidiaHash = d.sha256; }).nixGLNvidia)
       relevantDrivers;
   autoGlWrapper = import ./glWrapper.nix {inherit pkgs; };

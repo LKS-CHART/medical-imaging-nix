@@ -3,11 +3,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1733328505,
-        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "type": "github"
       },
       "original": {
@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706126131,
-        "narHash": "sha256-rWRlgjPpGjuvhdocs1Q8SGPMMNtH/IcJnhAcyLm7cRI=",
+        "lastModified": 1780410971,
+        "narHash": "sha256-YUBW5hI2ngHGn/oYIFyVscfnhx1QNQMea9bVoFRB6p0=",
         "owner": "cfhammill",
         "repo": "nixGL",
-        "rev": "efea555e50f95b2801a6b5c40e88ca73c9501609",
+        "rev": "8dd91a0cd72821f910ff6ac08768a2988221bd53",
         "type": "github"
       },
       "original": {
@@ -54,16 +54,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1734359947,
-        "narHash": "sha256-1Noao/H+N8nFB4Beoy8fgwrcOQLVm9o4zKW1ODaqK9E=",
+        "lastModified": 1728249353,
+        "narHash": "sha256-7NBJm1jfMeAowE1J2oljYqWVvI9X7FyyxBY4O8uB/Os=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "48d12d5e70ee91fe8481378e540433a7303dbf6a",
+        "rev": "c8a17040be4a20b29589cb4043a9e0c36af1930e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "release-24.11",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -71,17 +71,17 @@
     "orthanc_xnat_tools_src": {
       "flake": false,
       "locked": {
-        "lastModified": 1731509851,
-        "narHash": "sha256-1STr5cPMFMMmfTJsYiXv4XXHnf8AMfeWSX5EO1jJrhU=",
+        "lastModified": 1759868935,
+        "narHash": "sha256-oUqKoa5sClKml+gwHi7T+3PszH1k4Z8CouHTWJhDtPQ=",
         "ref": "refs/heads/main",
-        "rev": "4c2a254562eac34a77a112917b2c4b165cf3677c",
-        "revCount": 22,
+        "rev": "1597657a1bc1bb26fd4a007c048fbb7ce660f869",
+        "revCount": 26,
         "type": "git",
-        "url": "ssh://git@git.unity.local/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@git.unity.local/dsaa/mi/orthanc-xnat-tools"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@git.unity.local/dsaa/orthanc-xnat-tools"
+        "url": "ssh://git@git.unity.local/dsaa/mi/orthanc-xnat-tools"
       }
     },
     "root": {

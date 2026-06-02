@@ -3,12 +3,12 @@
 
   # Nixpkgs / NixOS version to use.
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixGL.url = "github:cfhammill/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
     orthanc_xnat_tools_src = {
-      url = "git+ssh://git@git.unity.local/dsaa/orthanc-xnat-tools";
+      url = "git+ssh://git@git.unity.local/dsaa/mi/orthanc-xnat-tools";
       flake = false;
     };
  
@@ -31,6 +31,9 @@
       supportedNvidiaDrivers = [
         "535.154.05"
         "535.183.06"
+        "580.95.05"
+        "595.71.05"
+        "580.126.09"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
