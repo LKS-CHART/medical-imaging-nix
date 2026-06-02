@@ -31,6 +31,9 @@
       supportedNvidiaDrivers = [
         "535.154.05"
         "535.183.06"
+        "580.95.05"
+        "595.71.05"
+        "580.126.09"
       ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
